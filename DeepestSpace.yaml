@@ -15,7 +15,7 @@ Children:
           validators: &id002 [CANID]
           value: '0'
       Base: Talon SRX
-      Name: Talon SRX 1
+      Name: LeftTalon1
     - Children: []
       Properties:
         CAN ID: !!robotbuilder.data.properties.ChoicesProperty
@@ -25,7 +25,7 @@ Children:
           validators: *id002
           value: '1'
       Base: Talon SRX
-      Name: Talon SRX 2
+      Name: LeftTalon2
     - Children: []
       Properties:
         CAN ID: !!robotbuilder.data.properties.ChoicesProperty
@@ -35,7 +35,7 @@ Children:
           validators: *id002
           value: '2'
       Base: Talon SRX
-      Name: Talon SRX 3
+      Name: LeftTalon3
     - Children: []
       Properties:
         CAN ID: !!robotbuilder.data.properties.ChoicesProperty
@@ -45,7 +45,7 @@ Children:
           validators: *id002
           value: '3'
       Base: Talon SRX
-      Name: Talon SRX 4
+      Name: RightTalon1
     - Children: []
       Properties:
         CAN ID: !!robotbuilder.data.properties.ChoicesProperty
@@ -55,7 +55,7 @@ Children:
           validators: *id002
           value: '4'
       Base: Talon SRX
-      Name: Talon SRX 5
+      Name: RightTalon2
     - Children: []
       Properties:
         CAN ID: !!robotbuilder.data.properties.ChoicesProperty
@@ -65,7 +65,7 @@ Children:
           validators: *id002
           value: '5'
       Base: Talon SRX
-      Name: Talon SRX 6
+      Name: RightTalon3
     Properties:
       Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Send to SmartDashboard, validators: null, value: false}
