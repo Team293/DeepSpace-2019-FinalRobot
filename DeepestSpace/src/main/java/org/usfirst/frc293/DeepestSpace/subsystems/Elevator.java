@@ -174,4 +174,3 @@ public class Elevator extends Subsystem {
         highScrewSpark.set(0);
     }
 }
-
