@@ -52,15 +52,15 @@ public class Gripper extends Subsystem {
         addChild("Compressor",compressor);
         
         
-        gripper = new DoubleSolenoid(0, 0, 1);
+        gripper = new DoubleSolenoid(1, 0, 1);
         addChild("Gripper",gripper);
         
         
-        pusher = new DoubleSolenoid(0, 2, 3);
+        pusher = new DoubleSolenoid(1, 2, 3);
         addChild("Pusher",pusher);
         
         
-        armTalon = new WPI_TalonSRX(9);
+        armTalon = new WPI_TalonSRX(11);
         
         
         

@@ -13,7 +13,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: &id002 [CANID]
-          value: '0'
+          value: '2'
       Base: Talon SRX
       Name: LeftTalon1
     - Children: []
@@ -23,7 +23,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '1'
+          value: '3'
       Base: Talon SRX
       Name: LeftTalon2
     - Children: []
@@ -33,7 +33,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '2'
+          value: '4'
       Base: Talon SRX
       Name: LeftTalon3
     - Children: []
@@ -43,7 +43,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '3'
+          value: '5'
       Base: Talon SRX
       Name: RightTalon1
     - Children: []
@@ -53,7 +53,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '4'
+          value: '6'
       Base: Talon SRX
       Name: RightTalon2
     - Children: []
@@ -63,7 +63,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '5'
+          value: '7'
       Base: Talon SRX
       Name: RightTalon3
     Properties:
@@ -103,14 +103,14 @@ Children:
           default: '0'
           name: Forward PCM (Solenoid)
           validators: &id004 [Solenoid]
-          value: '0'
+          value: '1'
         Reverse PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: &id005 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
             '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
           default: '0'
           name: Reverse PCM (Solenoid)
           validators: &id006 [Solenoid]
-          value: '0'
+          value: '1'
         Reverse Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: &id007 ['0', '1', '2', '3', '4', '5', '6', '7']
           default: '0'
@@ -132,13 +132,13 @@ Children:
           default: '0'
           name: Forward PCM (Solenoid)
           validators: *id004
-          value: '0'
+          value: '1'
         Reverse PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id005
           default: '0'
           name: Reverse PCM (Solenoid)
           validators: *id006
-          value: '0'
+          value: '1'
         Reverse Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id007
           default: '0'
@@ -160,7 +160,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '9'
+          value: '11'
       Base: Talon SRX
       Name: ArmTalon
     Properties:
@@ -188,13 +188,13 @@ Children:
           default: '0'
           name: Forward PCM (Solenoid)
           validators: *id004
-          value: '1'
+          value: '0'
         Reverse PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id005
           default: '0'
           name: Reverse PCM (Solenoid)
           validators: *id006
-          value: '1'
+          value: '0'
         Reverse Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id007
           default: '0'
@@ -216,7 +216,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '6'
+          value: '8'
       Base: Talon SRX
       Name: UpperScrewTalon
     - Children: []
@@ -226,7 +226,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '7'
+          value: '9'
       Base: Talon SRX
       Name: LowerScrewTalon
     Properties:
@@ -266,13 +266,13 @@ Children:
           default: '0'
           name: Reverse Channel (Solenoid)
           validators: *id008
-          value: '7'
+          value: '1'
         Forward Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id009
           default: '0'
           name: Forward Channel (Solenoid)
           validators: *id010
-          value: '6'
+          value: '0'
       Base: Double Solenoid
       Name: FrontPiston
     - Children: []
@@ -282,25 +282,25 @@ Children:
           default: '0'
           name: Forward PCM (Solenoid)
           validators: *id004
-          value: '1'
+          value: '0'
         Reverse PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id005
           default: '0'
           name: Reverse PCM (Solenoid)
           validators: *id006
-          value: '1'
+          value: '0'
         Reverse Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id007
           default: '0'
           name: Reverse Channel (Solenoid)
           validators: *id008
-          value: '1'
+          value: '5'
         Forward Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
           choices: *id009
           default: '0'
           name: Forward Channel (Solenoid)
           validators: *id010
-          value: '0'
+          value: '4'
       Base: Double Solenoid
       Name: BackPiston
     - Children: []
@@ -332,7 +332,7 @@ Children:
           default: '2'
           name: CAN ID
           validators: *id002
-          value: '8'
+          value: '10'
       Base: Talon SRX
       Name: ClimberTalon
     Properties:
@@ -926,6 +926,29 @@ Children:
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: DownUntilLimit
+  - Children: []
+    Properties:
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value:
+        - !!robotbuilder.data.properties.ParameterDescriptor {name: Location, type: String}
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+        name: Requires, type: Subsystem, validators: null, value: Elevator}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id028 []
+        name: Parameter presets
+        validators: null
+        value: *id028
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Command
+    Name: MoveElevator
   Properties: {}
   Base: Commands
   Name: Commands
