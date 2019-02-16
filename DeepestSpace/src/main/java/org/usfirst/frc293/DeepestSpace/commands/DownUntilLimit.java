@@ -37,20 +37,18 @@ public class DownUntilLimit extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        /*if(Robot.elevator.getHighLimit()){
+        if(Robot.elevator.highScrewLowLimit()){
             Robot.elevator.resetHighEnc();
-            Robot.elevator.highScrewStop();
         }
         else{
             Robot.elevator.highScrewDown();
         }
-        if(Robot.elevator.getLowLimit()){
+        if(Robot.elevator.lowScrewLowLimit()){
             Robot.elevator.resetLowEnc();
-            Robot.elevator.lowScrewStop();
         }
         else{
             Robot.elevator.lowScrewDown();
-        }*/
+        }
 
     }
 
