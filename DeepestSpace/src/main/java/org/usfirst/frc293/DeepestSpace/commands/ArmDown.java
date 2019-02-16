@@ -43,7 +43,7 @@ public class ArmDown extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.gripper.armDown();
+        Robot.gripper.armAngle(10);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -61,6 +61,6 @@ public class ArmDown extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-        Robot.gripper.armUp();
+        Robot.gripper.armAngle(0);
     }
 }
