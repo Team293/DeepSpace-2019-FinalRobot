@@ -106,8 +106,9 @@ public class Elevator extends Subsystem {
         upperScrewTalon.config_kI(0, kI);
         upperScrewTalon.config_kD(0, kD);
         upperScrewTalon.config_kF(0, kF);
+        //These Are Very Long Lines
+        //You Might Want to fix that
         upperScrewTalon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
-        upperScrewTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
 
         lowerScrewTalon.setSensorPhase(true);
         lowerScrewTalon.clearStickyFaults();
@@ -117,7 +118,6 @@ public class Elevator extends Subsystem {
         lowerScrewTalon.config_kD(0, kD);
         lowerScrewTalon.config_kF(0, kF);
         lowerScrewTalon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
-        lowerScrewTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         
     }
 
@@ -184,15 +184,10 @@ public class Elevator extends Subsystem {
     public boolean highScrewLowLimit(){
         return upperScrewTalon.getSensorCollection().isRevLimitSwitchClosed();
     }
-    public boolean highScrewHighLimit(){
-        return upperScrewTalon.getSensorCollection().isFwdLimitSwitchClosed();
-    }
     public boolean lowScrewLowLimit(){
         return lowerScrewTalon.getSensorCollection().isRevLimitSwitchClosed();
     }
-    public boolean lowScrewHighLimit(){
-        return lowerScrewTalon.getSensorCollection().isFwdLimitSwitchClosed();
-    }
+
 
     //Encoder Stuff
     public void resetHighEnc(){
@@ -235,8 +230,8 @@ public class Elevator extends Subsystem {
         if(elevatorPiston.get() == Value.kOff || elevatorPiston.get() == Value.kForward){
             elevatorDown();
         }
-        lowerScrewTalon.set( ControlMode.Position, midHatchSet[0]);
-        upperScrewTalon.set(ControlMode.Position,midHatchSet[1]);
+        lowerScrewTalon.set( ControlMode.Position, midCargoSet[0]);
+        upperScrewTalon.set(ControlMode.Position,midCargoSet[1]);
     }
     public void highHatch(){
         if(elevatorPiston.get() == Value.kOff || elevatorPiston.get() == Value.kReverse){
