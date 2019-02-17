@@ -71,8 +71,9 @@ public class Elevator extends Subsystem {
     // Things for SmartMotion Stuff
     //TODO Get numbers
     private double maxRPM = 5000;
-    private double maxAcc = 1000;
-    private double maxVel = 2000;
+    //TODO Test these variables so they don't break the robot
+    private int maxAcc = 4096;
+    private int maxVel = 4096*2;
 
     // Settings For Elevator (Inches)
     // {Up Screw, Low Screw, Piston}
@@ -112,6 +113,8 @@ public class Elevator extends Subsystem {
         //These Are Very Long Lines
         //You Might Want to fix that
         upperScrewTalon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+        upperScrewTalon.configMotionAcceleration(maxAcc);
+        upperScrewTalon.configMotionCruiseVelocity(maxVel);
 
         lowerScrewTalon.setSensorPhase(true);
         lowerScrewTalon.clearStickyFaults();
@@ -121,7 +124,8 @@ public class Elevator extends Subsystem {
         lowerScrewTalon.config_kD(0, kD);
         lowerScrewTalon.config_kF(0, kF);
         lowerScrewTalon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
-        
+        lowerScrewTalon.configMotionAcceleration(maxAcc);
+        lowerScrewTalon.configMotionCruiseVelocity(maxVel);
     }
 
     @Override
@@ -197,6 +201,7 @@ public class Elevator extends Subsystem {
     }
 
 
+
     //Encoder Stuff
     public void resetHighEnc(){
         upperScrewTalon.setSelectedSensorPosition(0);
@@ -207,6 +212,20 @@ public class Elevator extends Subsystem {
     public void elevatorLogic(double[] setpoints){
         upperScrewTalon.set( ControlMode.Position, setpoints[0]*gearRatio);
         lowerScrewTalon.set(ControlMode.Position,setpoints[1]*gearRatio);
+        if(setpoints[2] == 0){
+            if(elevatorPiston.get() == Value.kForward|| elevatorPiston.get() == Value.kOff){
+                elevatorDown();
+            }
+        }
+        else if(setpoints[2] == 1){
+            if(elevatorPiston.get() == Value.kReverse || elevatorPiston.get() == Value.kOff){
+                elevatorUp();
+            }
+        }
+    }
+    public void elevatorMagic(double[] setpoints){
+        upperScrewTalon.set( ControlMode.MotionMagic, setpoints[0]*gearRatio);
+        lowerScrewTalon.set(ControlMode.MotionMagic,setpoints[1]*gearRatio);
         if(setpoints[2] == 0){
             if(elevatorPiston.get() == Value.kForward|| elevatorPiston.get() == Value.kOff){
                 elevatorDown();
