@@ -80,7 +80,7 @@ public class Elevator extends Subsystem {
     // {Up Screw, Low Screw, Piston}
     private double[]
         groundSet = {0,0,0},
-        lowHatchSet = {4,4,0},
+        lowHatchSet = {3,3,0},
         lowCargoSet = {4,4,0},
         midHatchSet = {25,18,0},
         midCargoSet = {10,10,0},
