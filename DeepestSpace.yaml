@@ -363,7 +363,7 @@ Children:
         default: 1
         name: Number
         validators: &id015 [Joystick]
-        value: '0'
+        value: '1'
     Base: Joystick
     Name: Left Joy
   - Children: []
@@ -373,7 +373,7 @@ Children:
         default: 1
         name: Number
         validators: *id015
-        value: '1'
+        value: '0'
     Base: Joystick
     Name: Right Joy
   - Children:
@@ -536,6 +536,37 @@ Children:
           value: whenPressed
       Base: Joystick Button
       Name: MoveElevLowHatch
+    - Children: []
+      Properties:
+        Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
+          name: Joystick, validators: null, value: Op Right Joy}
+        Parameters: !!robotbuilder.data.properties.ParametersProperty
+          default: []
+          name: Parameters
+          validators: null
+          value:
+          - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: Location,
+            type: String, value: LowCargo}
+        Button: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id016
+          default: '1'
+          name: Button
+          validators: null
+          value: '1'
+        Command: !!robotbuilder.data.properties.TypeSelectionProperty
+          default: None
+          name: Command
+          type: Command
+          validators: *id017
+          value: MoveElevator
+        When to Run: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id018
+          default: whileHeld
+          name: When to Run
+          validators: null
+          value: whenPressed
+      Base: Joystick Button
+      Name: MoveElevLowCargo
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
         choices: *id014
