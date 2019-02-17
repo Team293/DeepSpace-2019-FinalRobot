@@ -128,6 +128,11 @@ public class Drivetrain extends Subsystem {
 
     rightTalon2.follow(rightTalon1);
     rightTalon3.follow(rightTalon1);
+    // Testing SmartDashboard with DriverStation
+    SmartDashboard.putString("DB/String 0", "Hello I am Robot");
+    SmartDashboard.putString("DB/String 1", "I have come to");
+    SmartDashboard.putString("DB/String 2", "greet my lord and savior");
+    SmartDashboard.putString("DB/String 3", "Elongated Muskrat");
 
     //Possibility to add gyro to can loop
     /*rightTalon2.setSensorPhase(true);
@@ -159,14 +164,10 @@ public class Drivetrain extends Subsystem {
         }
 
         //Updating Angle From Gyro
-        gyroAngle = gyro.getAngle();
+       // gyroAngle = gyro.getAngle();
 
 
-        // Testing SmartDashboard with DriverStation
-        SmartDashboard.putString("DB/String 0", "Hello I am Robot");
-        SmartDashboard.putString("DB/String 1", "I have come to");
-        SmartDashboard.putString("DB/String 2", "greet my lord and savior");
-        SmartDashboard.putString("DB/String 3", "Elongated Muskrat");
+
         
     }
 
@@ -207,7 +208,7 @@ public class Drivetrain extends Subsystem {
         rightTalon1.set(ControlMode.Position,rightInch);
     }
 
-    public void rotateTo(double angle){
+    /*public void rotateTo(double angle){
         rightTalon1.configSelectedFeedbackSensor(FeedbackDevice.valueOf(gyroAngle));
         leftTalon1.follow(rightTalon1,FollowerType.AuxOutput1);
         leftTalon1.setInverted(true);
@@ -218,11 +219,15 @@ public class Drivetrain extends Subsystem {
         leftTalon1.setInverted(false);
         leftTalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,4000);
         
+    }*/
+    public void percentDrive(double speed){
+        leftTalon1.set(ControlMode.PercentOutput,0.25);
+        rightTalon1.set(ControlMode.PercentOutput,0.25);
     }
     
 
     //For Redundancy
-    public void percentDrive(){
+    public void dumbDrive(){
         leftTalon1.set(Robot.oi.getLeftJoy().getY());
         rightTalon1.set(Robot.oi.getRightJoy().getY());
     }

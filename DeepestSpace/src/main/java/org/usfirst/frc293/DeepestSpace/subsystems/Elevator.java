@@ -63,7 +63,7 @@ public class Elevator extends Subsystem {
 
     //PID Parameters
     //TODO Tune these things
-    private double kF = .2;
+    private double kF = 0;
     private double kP = .15;
     private double kI = 0;
     private double kD = -0;
@@ -79,8 +79,8 @@ public class Elevator extends Subsystem {
     // {Up Screw, Low Screw, Piston}
     private double[]
         groundSet = {0,0,0},
-        lowHatchSet = {9,10,0},
-        lowCargoSet = {4,5,0},
+        lowHatchSet = {4,4,0},
+        lowCargoSet = {4,4,0},
         midHatchSet = {25,18,0},
         midCargoSet = {10,10,0},
         highHatchSet = {23,18,1},
@@ -144,8 +144,8 @@ public class Elevator extends Subsystem {
     public void periodic() {
         // Put code here to be run every loop
         //Stuff for smartDashboard will delete eventually
-        SmartDashboard.putNumber("Upper Screw Position",upperScrewTalon.getSensorCollection().getQuadraturePosition());
-        SmartDashboard.putNumber("Lower Screw Position",lowerScrewTalon.getSensorCollection().getQuadraturePosition());
+        SmartDashboard.putNumber("Upper Screw Position",upperScrewTalon.getSensorCollection().getQuadraturePosition()/4096*(22/16));
+        SmartDashboard.putNumber("Lower Screw Position",lowerScrewTalon.getSensorCollection().getQuadraturePosition()/4096*(22/16));
         SmartDashboard.putBoolean("Upper Screw Switch",!upperScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
         SmartDashboard.putBoolean("Lower Screw Switch",!lowerScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
     }
@@ -210,12 +210,14 @@ public class Elevator extends Subsystem {
         lowerScrewTalon.setSelectedSensorPosition(0);
     }
     public void elevatorLogic(double[] setpoints){
-        upperScrewTalon.set( ControlMode.Position, setpoints[0]*gearRatio);
-        lowerScrewTalon.set(ControlMode.Position,setpoints[1]*gearRatio);
+        upperScrewTalon.set( ControlMode.Position, setpoints[0]*gearRatio * 4096);
+        lowerScrewTalon.set(ControlMode.Position,setpoints[1]*gearRatio * 4096);
         if(setpoints[2] == 0){
             if(elevatorPiston.get() == Value.kForward|| elevatorPiston.get() == Value.kOff){
                 elevatorDown();
             }
+            SmartDashboard.putNumber("Stuff",setpoints[0]);
+            SmartDashboard.putNumber("Stuff2", setpoints[1]);
         }
         else if(setpoints[2] == 1){
             if(elevatorPiston.get() == Value.kReverse || elevatorPiston.get() == Value.kOff){
@@ -223,7 +225,7 @@ public class Elevator extends Subsystem {
             }
         }
     }
-    public void elevatorMagic(double[] setpoints){
+    /*public void elevatorMagic(double[] setpoints){
         upperScrewTalon.set( ControlMode.MotionMagic, setpoints[0]*gearRatio);
         lowerScrewTalon.set(ControlMode.MotionMagic,setpoints[1]*gearRatio);
         if(setpoints[2] == 0){
@@ -236,7 +238,7 @@ public class Elevator extends Subsystem {
                 elevatorUp();
             }
         }
-    }
+    }*/
     //Moving Screws to Position
     public void ground(){
         elevatorLogic(groundSet);
