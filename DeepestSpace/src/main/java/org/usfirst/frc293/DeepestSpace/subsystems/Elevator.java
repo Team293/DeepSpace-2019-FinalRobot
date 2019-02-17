@@ -80,7 +80,7 @@ public class Elevator extends Subsystem {
         lowHatchSet = {9,10,0},
         lowCargoSet = {4,5,0},
         midHatchSet = {25,18,0},
-        midCargoSet = {25,18,0},
+        midCargoSet = {10,10,0},
         highHatchSet = {23,18,1},
         highCargoSet = {23,18,1};
     
