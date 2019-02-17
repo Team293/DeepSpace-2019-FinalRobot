@@ -56,9 +56,9 @@ public class Drivetrain extends Subsystem {
     private double turnI = -0;
     private double turnD = -0;
     
-    /*private double angleTolerance = 2.0;
+    private double angleTolerance = 2.0;
     private PIDController turnPID;
-    private AHRS gyro;*/
+    private AHRS gyro;
    
     private double speed = 1.0;
     //TODO Find Max RPM
