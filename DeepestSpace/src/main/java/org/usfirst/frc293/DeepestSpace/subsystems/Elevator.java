@@ -84,7 +84,7 @@ public class Elevator extends Subsystem {
     private double[]
         groundSet = {0,0,0},
         lowHatchSet = {3,9,0},
-        lowCargoSet = {4,9,1},
+        lowCargoSet = {24.5,9,0},
         midHatchSet = {25,18,0},
         midCargoSet = {10,10,0},
         highHatchSet = {23,18,1},
@@ -121,8 +121,8 @@ public class Elevator extends Subsystem {
         upperScrewTalon.configMotionAcceleration(maxAcc);
         upperScrewTalon.configMotionCruiseVelocity(maxVel);
         upperScrewTalon.setNeutralMode(NeutralMode.Brake);
-        lowerScrewTalon.configForwardSoftLimitEnable(true);
-        upperScrewTalon.configForwardSoftLimitThreshold(135168/2, 4000);
+        upperScrewTalon.configForwardSoftLimitEnable(true);
+        upperScrewTalon.configForwardSoftLimitThreshold(135168,4000); //135168
 
         lowerScrewTalon.setSensorPhase(true);
         lowerScrewTalon.clearStickyFaults();
@@ -186,10 +186,10 @@ public class Elevator extends Subsystem {
 
     //Base Methods for Low Screw (Will be Deprecated Soon)
     public void lowScrewUp(){
-        lowerScrewTalon.set(0.25);
+        lowerScrewTalon.set(0.5);
     }
     public void lowScrewDown(){
-        lowerScrewTalon.set(-0.25);
+        lowerScrewTalon.set(-0.5);
     }
     public void lowScrewStop(){
         lowerScrewTalon.set(0);
