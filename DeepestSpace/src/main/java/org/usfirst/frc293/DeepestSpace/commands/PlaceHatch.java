@@ -17,6 +17,7 @@ import org.usfirst.frc293.DeepestSpace.subsystems.*;
 /**
  *
  */
+/*
 public class PlaceHatch extends CommandGroup {
 
 
@@ -48,3 +49,4 @@ public class PlaceHatch extends CommandGroup {
  
     } 
 }
+*/
