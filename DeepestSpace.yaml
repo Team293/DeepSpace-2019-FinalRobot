@@ -998,10 +998,10 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\jss10\',
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\SPIKE\',
     extension: null, folder: true, name: Wiring file location, validators: null, value: 'C:\Users\jss10\'}
-  Export Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\jss10\FRCProjects',
-    extension: null, folder: true, name: Export Directory, validators: null, value: 'C:\Users\jss10\DeepSpace-2019-FinalRobot'}
+  Export Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\SPIKE\FRCProjects',
+    extension: null, folder: true, name: Export Directory, validators: null, value: 'C:\Users\SPIKE\FRCProjects\DeepSpace-2019-FinalRobot'}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
 Base: Robot
