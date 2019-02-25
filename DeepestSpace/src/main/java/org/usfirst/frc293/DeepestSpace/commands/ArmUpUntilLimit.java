@@ -43,9 +43,11 @@ public class ArmUpUntilLimit extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.gripper.armUp();
         if(Robot.gripper.atLimit()){
             Robot.gripper.setPot();
+        }
+        else{
+            Robot.gripper.armUp();
         }
     }
 

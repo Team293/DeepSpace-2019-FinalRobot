@@ -63,5 +63,6 @@ public class ArmToAngle extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+        Robot.gripper.armStop();
     }
 }
