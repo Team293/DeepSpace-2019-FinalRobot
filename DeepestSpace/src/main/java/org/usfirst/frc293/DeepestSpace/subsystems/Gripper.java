@@ -88,7 +88,6 @@ public class Gripper extends Subsystem {
         armTalon.config_kD(0, kD);
         armTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         armTalon.configFeedbackNotContinuous(true,4000);
-        armTalon.setInverted(true);
         armTalon.setNeutralMode(NeutralMode.Brake);
     }
 
