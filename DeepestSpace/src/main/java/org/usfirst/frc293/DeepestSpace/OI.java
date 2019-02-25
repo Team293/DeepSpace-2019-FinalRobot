@@ -72,7 +72,7 @@ public class OI {
         opRightJoy = new Joystick(2);
         
         armUpButton = new JoystickButton(opRightJoy, 3);
-        armUpButton.whenPressed(new ArmToAngle(20.0));
+        armUpButton.whenPressed(new ArmToAngle(47.0));
         moveElevLowCargo = new JoystickButton(opRightJoy, 1);
         moveElevLowCargo.whenPressed(new MoveElevator("LowCargo"));
         moveElevLowHatch = new JoystickButton(opRightJoy, 2);

@@ -78,14 +78,13 @@ public class Elevator extends Subsystem {
     private int maxAcc = 4096;
     private int maxVel = 4096*2;
     
-    private double testDeviation = 0;
 
     // Settings For Elevator (Inches)
-    // Up Screw, Low Screw, Piston}
+    // High Screw, Low Screw, Piston}
     private double[]
         groundSet = {0,0,0},
-        lowHatchSet = {9,0,0},
-        lowCargoSet = {9,0,0},
+        lowHatchSet = {0,0,0},
+        lowCargoSet = {0,13,0},
         midHatchSet = {25,18,0},
         midCargoSet = {10,10,0},
         highHatchSet = {23,18,1},
@@ -138,7 +137,7 @@ public class Elevator extends Subsystem {
         lowerScrewTalon.configMotionCruiseVelocity(maxVel);
         lowerScrewTalon.setNeutralMode(NeutralMode.Brake);
         lowerScrewTalon.configForwardSoftLimitEnable(true);
-        lowerScrewTalon.configForwardSoftLimitThreshold(90100,4000);
+        lowerScrewTalon.configForwardSoftLimitThreshold(73216,4000);
         
 
     }
@@ -236,6 +235,7 @@ public class Elevator extends Subsystem {
     public void elevatorLogic(double[] setpoints){
         upperScrewTalon.set(ControlMode.Position, setpoints[0]*gearRatio * 4096);
         lowerScrewTalon.set(ControlMode.Position,setpoints[1]*gearRatio * 4096);
+
         if(setpoints[2] == 0){
             if(elevatorPiston.get() == Value.kForward|| elevatorPiston.get() == Value.kOff){
                 elevatorDown();
