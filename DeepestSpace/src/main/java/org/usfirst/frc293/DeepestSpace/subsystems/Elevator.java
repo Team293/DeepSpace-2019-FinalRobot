@@ -89,7 +89,8 @@ public class Elevator extends Subsystem {
         midHatchSet = {25,18,0},
         midCargoSet = {10,10,0},
         highHatchSet = {23,18,1},
-        highCargoSet = {23,18,1};
+        highCargoSet = {23,18,1},
+        cargoShipSet = {5,5,0};
     
     private double gearRatio = 11.0/8.0;
         
@@ -247,7 +248,7 @@ public class Elevator extends Subsystem {
         }
         
     }
-    public void elevatorMagic(double[] setpoints){
+    /*public void elevatorMagic(double[] setpoints){
         upperScrewTalon.set( ControlMode.MotionMagic, setpoints[0]*gearRatio);
         lowerScrewTalon.set(ControlMode.MotionMagic,setpoints[1]*gearRatio);
         if(setpoints[2] == 0){
@@ -260,7 +261,7 @@ public class Elevator extends Subsystem {
                 elevatorUp();
             }
         }
-    }
+    }*/
     //Moving Screws to Position
     public void ground(){
         elevatorLogic(groundSet);
@@ -282,5 +283,8 @@ public class Elevator extends Subsystem {
     }
     public void highCargo(){
         elevatorLogic(highCargoSet);
+    }
+    public void cargoShip(){
+        elevatorLogic(cargoShipSet);
     }
 }
