@@ -57,11 +57,11 @@ public class MoveElevator extends Command {
                 break;
             case "LowHatch":
                 Robot.elevator.lowHatch();
-                Robot.arm.setAngle(armSetpoints[2]);
+                //Robot.arm.setAngle(armSetpoints[2]);
                 break;
             case "LowCargo":
                 Robot.elevator.lowCargo();
-                Robot.arm.setAngle(armSetpoints[1]);
+                //Robot.arm.setAngle(armSetpoints[1]);
                 break;
             case "MidHatch":
                 Robot.elevator.midHatch();
