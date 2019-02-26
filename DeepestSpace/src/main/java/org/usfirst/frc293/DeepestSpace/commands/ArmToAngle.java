@@ -47,9 +47,8 @@ public class ArmToAngle extends Command {
     @Override
     protected void execute() {
 
-        // Raw Sensor Units = (Actual Angle * 4.94) + 285
-        rawAngle = (m_Angle * 4.94) + 285;
-        Robot.arm.setSetpoint(rawAngle);
+
+        Robot.arm.setAngle(47);
     }
 
     // Make this return true when this Command no longer needs to run execute()
