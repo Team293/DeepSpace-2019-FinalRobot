@@ -77,9 +77,9 @@ public class OI {
         opRightJoy = new Joystick(2);
         
         armUpButton = new JoystickButton(opRightJoy, 6);
-        armUpButton.whenPressed(new ArmUp());
+        armUpButton.whileHeld(new ArmUp());
         armDownButton = new JoystickButton(opRightJoy, 4);
-        armDownButton.whenPressed(new ArmDown());
+        armDownButton.whileHeld(new ArmDown());
         moveElevLowCargo = new JoystickButton(opRightJoy, 1);
         moveElevLowCargo.whenPressed(new MoveElevator("LowCargo"));
         moveElevLowHatch = new JoystickButton(opRightJoy, 2);
@@ -119,9 +119,9 @@ public class OI {
         SmartDashboard.putData("FrontStiltsDown", new FrontStiltsDown());
         SmartDashboard.putData("ClimberForward", new ClimberForward());
         SmartDashboard.putData("DownUntilLimit", new DownUntilLimit());
-        SmartDashboard.putData("MoveElevator", new MoveElevator("LowCargo"));
+        SmartDashboard.putData("MoveElevator", new MoveElevator("string"));
         SmartDashboard.putData("DriveForward", new DriveForward());
-        SmartDashboard.putData("ArmToAngle", new ArmToAngle(20));
+        SmartDashboard.putData("ArmToAngle", new ArmToAngle(20.0));
         SmartDashboard.putData("Shoot", new Shoot());
         SmartDashboard.putData("ArmDown", new ArmDown());
         SmartDashboard.putData("ArmUp", new ArmUp());

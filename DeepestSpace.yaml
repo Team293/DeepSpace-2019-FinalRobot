@@ -677,7 +677,7 @@ Children:
           default: whileHeld
           name: When to Run
           validators: null
-          value: whenPressed
+          value: whileHeld
       Base: Joystick Button
       Name: ArmDownButton
     - Children: []
@@ -706,7 +706,7 @@ Children:
           default: whileHeld
           name: When to Run
           validators: null
-          value: whenPressed
+          value: whileHeld
       Base: Joystick Button
       Name: ArmUpButton
     Properties:
@@ -1284,7 +1284,7 @@ Properties:
   Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\SPIKE\',
     extension: null, folder: true, name: Wiring file location, validators: null, value: 'C:\Users\jss10\'}
   Export Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\SPIKE\FRCProjects',
-    extension: null, folder: true, name: Export Directory, validators: null, value: 'C:\Users\jss10\DeepSpace-2019-FinalRobot\DeepestSpace'}
+    extension: null, folder: true, name: Export Directory, validators: null, value: 'C:\Users\SPIKE\FRCProjects\DeepSpace-2019-FinalRobot'}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
 Base: Robot
