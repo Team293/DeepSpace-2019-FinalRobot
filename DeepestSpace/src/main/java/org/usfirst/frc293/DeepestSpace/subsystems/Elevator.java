@@ -39,8 +39,6 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANDigitalInput.LimitSwitchPolarity;
 
-import org.ietf.jgss.Oid;
-import org.usfirst.frc293.DeepestSpace.Robot;
 /**
  *
  */
