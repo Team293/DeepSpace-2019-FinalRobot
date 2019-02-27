@@ -53,31 +53,31 @@ public class MoveElevator extends Command {
         switch (m_Location){
             case "Ground":
                 Robot.elevator.ground();
-                Robot.arm.setAngle(armSetpoints[2]);
+                Robot.arm.setAngle(armSetpoints[4]);
                 break;
             case "LowHatch":
                 Robot.elevator.lowHatch();
-                //Robot.arm.setAngle(armSetpoints[2]);
+                Robot.arm.setAngle(armSetpoints[3]);
                 break;
             case "LowCargo":
                 Robot.elevator.lowCargo();
-                //Robot.arm.setAngle(armSetpoints[1]);
+                Robot.arm.setAngle(armSetpoints[2]);
                 break;
             case "MidHatch":
                 Robot.elevator.midHatch();
-                Robot.arm.setAngle(armSetpoints[2]);
+                Robot.arm.setAngle(armSetpoints[3]);
                 break;
             case "MidCargo":
                 Robot.elevator.midCargo();
-                Robot.arm.setAngle(armSetpoints[1]);
+                Robot.arm.setAngle(armSetpoints[2]);
                 break;
             case "HighHatch":
                 Robot.elevator.highHatch();
-                Robot.arm.setAngle(armSetpoints[2]);
+                Robot.arm.setAngle(armSetpoints[3]);
                 break;
             case "HighCargo":
                 Robot.elevator.highCargo();
-                Robot.arm.setAngle(armSetpoints[1]);
+                Robot.arm.setAngle(armSetpoints[2]);
                 break;
             case "Up":
                 Robot.elevator.lowScrewUp();
@@ -85,10 +85,10 @@ public class MoveElevator extends Command {
                 break;
             case "CargoShip":
                 Robot.elevator.cargoShip();
-                Robot.arm.setAngle(armSetpoints[1]);
+                Robot.arm.setAngle(armSetpoints[3]);
             case "Stow":
                 Robot.elevator.ground();
-                Robot.arm.setAngle(armSetpoints[0]);
+                // Robot.arm.setAngle(armSetpoints[0]);
             default:
                 throw new IllegalArgumentException("Look in MoveElevator " + m_Location);
                 

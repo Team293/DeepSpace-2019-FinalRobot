@@ -54,6 +54,7 @@ public class Robot extends TimedRobot {
         drivetrain = new Drivetrain();
         gripper = new Gripper();
         elevator = new Elevator();
+        SmartDashboard.putData(elevator);
         climber = new Climber();
         arm = new Arm();
         SmartDashboard.putData(arm);
