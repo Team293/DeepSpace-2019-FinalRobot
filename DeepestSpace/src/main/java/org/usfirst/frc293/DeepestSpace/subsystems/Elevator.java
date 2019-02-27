@@ -79,7 +79,7 @@ public class Elevator extends Subsystem {
 
     // Settings For Elevator (Inches)
     // High Screw, Low Screw, Piston}
-    private double[]
+    public double[]
         groundSet = {0,0,0},
         lowHatchSet = {2,2.5,0}, //used to be (0,0,0)
         lowCargoSet = {3.5,13,0},
@@ -313,5 +313,17 @@ public class Elevator extends Subsystem {
     }
     public void cargoShip(){
         elevatorLogic(cargoShipSet);
+    }
+
+    public boolean atPosition(double[] setpoints){
+        double highAbsDif = getHighInch()-setpoints[0];
+        double lowAbsDif = getLowInch()-setpoints[1];
+        double totalError = Math.abs(highAbsDif + lowAbsDif);
+        if(totalError <= 1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
