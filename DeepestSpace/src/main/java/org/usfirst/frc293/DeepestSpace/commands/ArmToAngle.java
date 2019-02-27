@@ -48,7 +48,7 @@ public class ArmToAngle extends Command {
     protected void execute() {
 
 
-        Robot.arm.setAngle(47);
+        Robot.arm.setAngle(60.);
     }
 
     // Make this return true when this Command no longer needs to run execute()
