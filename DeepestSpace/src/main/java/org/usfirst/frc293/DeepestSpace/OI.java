@@ -123,7 +123,7 @@ public class OI {
         moveElevGround = new JoystickButton(opLeftJoy, 2);
         moveElevGround.whenPressed(new MoveElevator("Ground"));
         moveElevStow = new JoystickButton(opLeftJoy, 1);
-        moveElevStow.whenPressed(new MoveElevator("Ground"));
+        moveElevStow.whenPressed(new MoveElevator("Stow"));
         rightJoy = new Joystick(0);
         
         leftJoy = new Joystick(1);
@@ -144,7 +144,7 @@ public class OI {
         SmartDashboard.putData("ClimberForward", new ClimberForward());
         SmartDashboard.putData("MoveElevator", new MoveElevator("LowHatch"));
         SmartDashboard.putData("DriveForward", new DriveForward());
-        SmartDashboard.putData("ArmToAngle", new ArmToAngle(20));
+        SmartDashboard.putData("ArmToAngle", new ArmToAngle(0));
         SmartDashboard.putData("Shoot", new Shoot());
         SmartDashboard.putData("ArmDown", new ArmDown());
         SmartDashboard.putData("ArmUp", new ArmUp());

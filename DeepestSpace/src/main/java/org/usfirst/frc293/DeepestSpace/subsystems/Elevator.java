@@ -117,12 +117,12 @@ public class Elevator extends Subsystem {
         //These Are Very Long Lines
         //You Might Want to fix that
         upperScrewTalon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+        upperScrewTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         upperScrewTalon.configMotionAcceleration(maxAcc);
         upperScrewTalon.configMotionCruiseVelocity(maxVel);
         upperScrewTalon.setNeutralMode(NeutralMode.Brake);
         // upperScrewTalon.configForwardSoftLimitEnable(true);
         // upperScrewTalon.configForwardSoftLimitThreshold(135168,4000); //135168
-        upperScrewTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
 
 
         lowerScrewTalon.setSensorPhase(true);
@@ -133,12 +133,20 @@ public class Elevator extends Subsystem {
         lowerScrewTalon.config_kD(0, kD);
         lowerScrewTalon.config_kF(0, kF);
         lowerScrewTalon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+        lowerScrewTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         lowerScrewTalon.configMotionAcceleration(maxAcc);
         lowerScrewTalon.configMotionCruiseVelocity(maxVel);
         lowerScrewTalon.setNeutralMode(NeutralMode.Brake);
         // lowerScrewTalon.configForwardSoftLimitEnable(true);
         // lowerScrewTalon.configForwardSoftLimitThreshold(73216,4000);
-        lowerScrewTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+
+        // setting encoder to stow values
+        // NOTE: This logic assumes that the robot starts in the STOW position!
+        // If this is not the case, the encoder will be indexed to the WRONG value, until it
+        // encounters a limit switch, at which time it will be reset.
+        setHighEncStow();
+        setLowEncStow();
+        
         
 
     }
@@ -168,6 +176,12 @@ public class Elevator extends Subsystem {
         }
         if(lowerScrewTalon.getSensorCollection().isRevLimitSwitchClosed()){
             lowerScrewTalon.setSelectedSensorPosition(0);
+        }
+        if(upperScrewTalon.getSensorCollection().isFwdLimitSwitchClosed()){
+            upperScrewTalon.setSelectedSensorPosition(135168); //TODO check value
+        }
+        if(lowerScrewTalon.getSensorCollection().isFwdLimitSwitchClosed()){
+            lowerScrewTalon.setSelectedSensorPosition(73216); //TODO check value
         }
 
     }
@@ -238,13 +252,12 @@ public class Elevator extends Subsystem {
     public void resetLowEnc(){
         lowerScrewTalon.setSelectedSensorPosition(0);
     }
-    public double getLowInch(){
-        return ((lowerScrewTalon.getSensorCollection().getQuadraturePosition()/4096)*gearRatio);
+    public void setHighEncStow(){
+        upperScrewTalon.setSelectedSensorPosition(90112); //16 inches * 11/8 * 4096
     }
-    public double getHighInch(){
-        return ((upperScrewTalon.getSensorCollection().getQuadraturePosition()/4096)*gearRatio);
+    public void setLowEncStow(){
+        lowerScrewTalon.setSelectedSensorPosition(0);
     }
-
     public void elevatorLogic(double[] setpoints){
         upperScrewTalon.set(ControlMode.Position, setpoints[0]*gearRatio * 4096);
         lowerScrewTalon.set(ControlMode.Position,setpoints[1]*gearRatio * 4096);
