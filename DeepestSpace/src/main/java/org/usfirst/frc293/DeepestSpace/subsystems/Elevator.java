@@ -87,7 +87,8 @@ public class Elevator extends Subsystem {
         midCargoSet = {22.5,12.5,0},
         highHatchSet = {21,10.5,1}, //used to be (23,18,1)
         highCargoSet = {23.5,10.5,1},
-        cargoShipSet = {5,5,0};
+        cargoShipSet = {5,5,0},
+        stowSet = {16,0,0};
     
     private double gearRatio = 11.0/8.0;
         
@@ -167,8 +168,10 @@ public class Elevator extends Subsystem {
         //Stuff for smartDashboard will delete eventually
         SmartDashboard.putNumber("Upper Screw Position",upperScrewTalon.getSensorCollection().getQuadraturePosition()/4096*(22/16));
         SmartDashboard.putNumber("Lower Screw Position",lowerScrewTalon.getSensorCollection().getQuadraturePosition()/4096*(22/16));
-        SmartDashboard.putBoolean("Upper Screw Switch",!upperScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
-        SmartDashboard.putBoolean("Lower Screw Switch",!lowerScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
+        SmartDashboard.putBoolean("Upper Screw Low Switch",!upperScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
+        SmartDashboard.putBoolean("Lower Screw Low Switch",!lowerScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
+        SmartDashboard.putBoolean("Upper Screw High Switch",!upperScrewTalon.getSensorCollection().isFwdLimitSwitchClosed());
+        
         SmartDashboard.putNumber("Lower Raw Data", upperScrewTalon.getSensorCollection().getQuadraturePosition());
         
         if(upperScrewTalon.getSensorCollection().isRevLimitSwitchClosed()){
@@ -318,6 +321,9 @@ public class Elevator extends Subsystem {
     }
     public void cargoShip(){
         elevatorLogic(cargoShipSet);
+    }
+    public void stow(){
+        elevatorLogic(stowSet);
     }
 
     public boolean atPosition(double[] setpoints){

@@ -105,8 +105,10 @@ public class MoveElevator extends Command {
                 Robot.buttonLights.turnAllOff();
                 Robot.buttonLights.setButtonLight(8, Robot.elevator.atPosition(Robot.elevator.cargoShipSet));
             case "Stow":
-                Robot.elevator.ground();
-                // Robot.arm.setAngle(armSetpoints[0]);
+                Robot.elevator.stow();
+                if(Robot.elevator.atPosition(Robot.elevator.stowSet)){
+                    Robot.arm.setAngle(armSetpoints[2]);
+                }
 
             default:
                 throw new IllegalArgumentException("Look in MoveElevator " + m_Location);
