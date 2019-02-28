@@ -166,8 +166,8 @@ public class Elevator extends Subsystem {
     public void periodic() {
         // Put code here to be run every loop
         //Stuff for smartDashboard will delete eventually
-        SmartDashboard.putNumber("Upper Screw Position",upperScrewTalon.getSensorCollection().getQuadraturePosition()/4096*(22/16));
-        SmartDashboard.putNumber("Lower Screw Position",lowerScrewTalon.getSensorCollection().getQuadraturePosition()/4096*(22/16));
+        SmartDashboard.putNumber("Upper Screw Position",getHighInch());
+        SmartDashboard.putNumber("Lower Screw Position",getLowInch());
         SmartDashboard.putBoolean("Upper Screw Low Switch",!upperScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
         SmartDashboard.putBoolean("Lower Screw Low Switch",!lowerScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
         SmartDashboard.putBoolean("Upper Screw High Switch",!upperScrewTalon.getSensorCollection().isFwdLimitSwitchClosed());
@@ -262,10 +262,10 @@ public class Elevator extends Subsystem {
         lowerScrewTalon.setSelectedSensorPosition(0);
     }
     public double getHighInch(){
-        return ((upperScrewTalon.getSensorCollection().getQuadraturePosition()/4096) * gearRatio);
+        return ((upperScrewTalon.getSensorCollection().getQuadraturePosition()/4096) * (8/11));
     }
     public double getLowInch(){
-        return ((lowerScrewTalon.getSensorCollection().getQuadraturePosition()/4096) * gearRatio);
+        return ((lowerScrewTalon.getSensorCollection().getQuadraturePosition()/4096) * (8/11));
     }
     public void elevatorLogic(double[] setpoints){
         upperScrewTalon.set(ControlMode.Position, setpoints[0]*gearRatio * 4096);

@@ -111,7 +111,7 @@ public class MoveElevator extends Command {
                 }
 
             default:
-                throw new IllegalArgumentException("Look in MoveElevator " + m_Location);
+                System.out.println("Look in MoveElevator " + m_Location);
                 
 
 
