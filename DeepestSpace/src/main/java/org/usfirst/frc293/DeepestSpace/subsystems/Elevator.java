@@ -258,6 +258,12 @@ public class Elevator extends Subsystem {
     public void setLowEncStow(){
         lowerScrewTalon.setSelectedSensorPosition(0);
     }
+    public double getHighInch(){
+        return ((upperScrewTalon.getSensorCollection().getQuadraturePosition()/4096) * gearRatio);
+    }
+    public double getLowInch(){
+        return ((lowerScrewTalon.getSensorCollection().getQuadraturePosition()/4096) * gearRatio);
+    }
     public void elevatorLogic(double[] setpoints){
         upperScrewTalon.set(ControlMode.Position, setpoints[0]*gearRatio * 4096);
         lowerScrewTalon.set(ControlMode.Position,setpoints[1]*gearRatio * 4096);

@@ -144,7 +144,7 @@ public class OI {
         SmartDashboard.putData("ClimberForward", new ClimberForward());
         SmartDashboard.putData("MoveElevator", new MoveElevator("LowHatch"));
         SmartDashboard.putData("DriveForward", new DriveForward());
-        SmartDashboard.putData("ArmToAngle", new ArmToAngle(0));
+        SmartDashboard.putData("ArmToAngle", new ArmToAngle(20));
         SmartDashboard.putData("Shoot", new Shoot());
         SmartDashboard.putData("ArmDown", new ArmDown());
         SmartDashboard.putData("ArmUp", new ArmUp());
