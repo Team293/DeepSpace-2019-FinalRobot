@@ -118,7 +118,7 @@ public class Elevator extends Subsystem {
         //These Are Very Long Lines
         //You Might Want to fix that
         upperScrewTalon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
-        upperScrewTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+        //upperScrewTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         upperScrewTalon.configMotionAcceleration(maxAcc);
         upperScrewTalon.configMotionCruiseVelocity(maxVel);
         upperScrewTalon.setNeutralMode(NeutralMode.Brake);
@@ -134,10 +134,11 @@ public class Elevator extends Subsystem {
         lowerScrewTalon.config_kD(0, kD);
         lowerScrewTalon.config_kF(0, kF);
         lowerScrewTalon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
-        lowerScrewTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
+        //lowerScrewTalon.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         lowerScrewTalon.configMotionAcceleration(maxAcc);
         lowerScrewTalon.configMotionCruiseVelocity(maxVel);
         lowerScrewTalon.setNeutralMode(NeutralMode.Brake);
+
         // lowerScrewTalon.configForwardSoftLimitEnable(true);
         // lowerScrewTalon.configForwardSoftLimitThreshold(73216,4000);
 
@@ -166,13 +167,13 @@ public class Elevator extends Subsystem {
     public void periodic() {
         // Put code here to be run every loop
         //Stuff for smartDashboard will delete eventually
-        SmartDashboard.putNumber("Upper Screw Position",getHighInch());
-        SmartDashboard.putNumber("Lower Screw Position",getLowInch());
+        SmartDashboard.putNumber("Upper Screw Position",upperScrewTalon.getSensorCollection().getQuadraturePosition()/4096*(8/11));
+        SmartDashboard.putNumber("Lower Screw Position",lowerScrewTalon.getSensorCollection().getQuadraturePosition()/4096*(8/11));
         SmartDashboard.putBoolean("Upper Screw Low Switch",!upperScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
         SmartDashboard.putBoolean("Lower Screw Low Switch",!lowerScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
         SmartDashboard.putBoolean("Upper Screw High Switch",!upperScrewTalon.getSensorCollection().isFwdLimitSwitchClosed());
-        
-        SmartDashboard.putNumber("Lower Raw Data", upperScrewTalon.getSensorCollection().getQuadraturePosition());
+        SmartDashboard.putNumber("Upper Raw Data", upperScrewTalon.getSensorCollection().getQuadraturePosition());
+        SmartDashboard.putNumber("Lower Raw Data", lowerScrewTalon.getSensorCollection().getQuadraturePosition());
         
         if(upperScrewTalon.getSensorCollection().isRevLimitSwitchClosed()){
             upperScrewTalon.setSelectedSensorPosition(0);
@@ -180,7 +181,7 @@ public class Elevator extends Subsystem {
         if(lowerScrewTalon.getSensorCollection().isRevLimitSwitchClosed()){
             lowerScrewTalon.setSelectedSensorPosition(0);
         }
-        if(upperScrewTalon.getSensorCollection().isFwdLimitSwitchClosed()){
+       if(upperScrewTalon.getSensorCollection().isFwdLimitSwitchClosed()){
             upperScrewTalon.setSelectedSensorPosition(135168); //TODO check value
         }
         if(lowerScrewTalon.getSensorCollection().isFwdLimitSwitchClosed()){

@@ -70,44 +70,44 @@ public class ButtonLights extends Subsystem {
     // here. Call these from Commands.
 
     public void turnAllOff(){
-        Joystick tempJoy = Robot.oi.getOpLeftJoy();
-        tempJoy.setOutputs(0);
+        Joystick buttonBoard = Robot.oi.getOpLeftJoy();
+        buttonBoard.setOutputs(0);
     }
     public void setButtonLight(int lightNumber,boolean state){
         Robot.oi.getOpLeftJoy().setOutput(lightNumber, state);
     }
     public void wackAMole(){
-        Joystick tempJoy = Robot.oi.getOpLeftJoy();
-        tempJoy.setOutput(1,wackedMoles[0]);
-        if(!tempJoy.getRawButton(1)){
+        Joystick buttonBoard = Robot.oi.getOpLeftJoy();
+        buttonBoard.setOutput(1,wackedMoles[0]);
+        if(!buttonBoard.getRawButton(1)){
             wackedMoles[0] = false;
         }
-        tempJoy.setOutput(2,wackedMoles[1]);
-        if(!tempJoy.getRawButton(2)){
+        buttonBoard.setOutput(2,wackedMoles[1]);
+        if(!buttonBoard.getRawButton(2)){
             wackedMoles[1] = false;
         }
-        tempJoy.setOutput(3,wackedMoles[2]);
-        if(!tempJoy.getRawButton(3)){
+        buttonBoard.setOutput(3,wackedMoles[2]);
+        if(!buttonBoard.getRawButton(3)){
             wackedMoles[2] = false;
         }
-        tempJoy.setOutput(4,wackedMoles[3]);
-        if(!tempJoy.getRawButton(4)){
+        buttonBoard.setOutput(4,wackedMoles[3]);
+        if(!buttonBoard.getRawButton(4)){
             wackedMoles[3] = false;
         }
-        tempJoy.setOutput(5,wackedMoles[4]);
-        if(!tempJoy.getRawButton(5)){
+        buttonBoard.setOutput(5,wackedMoles[4]);
+        if(!buttonBoard.getRawButton(5)){
             wackedMoles[4] = false;
         }
-        tempJoy.setOutput(6,wackedMoles[5]);
-        if(!tempJoy.getRawButton(6)){
+        buttonBoard.setOutput(6,wackedMoles[5]);
+        if(!buttonBoard.getRawButton(6)){
             wackedMoles[5] = false;
         }
-        tempJoy.setOutput(7,wackedMoles[6]);
-        if(!tempJoy.getRawButton(7)){
+        buttonBoard.setOutput(7,wackedMoles[6]);
+        if(!buttonBoard.getRawButton(7)){
             wackedMoles[6] = false;
         }
-        tempJoy.setOutput(8,wackedMoles[7]);
-        if(!tempJoy.getRawButton(8)){
+        buttonBoard.setOutput(8,wackedMoles[7]);
+        if(!buttonBoard.getRawButton(8)){
             wackedMoles[7] = false;
         }
     }
