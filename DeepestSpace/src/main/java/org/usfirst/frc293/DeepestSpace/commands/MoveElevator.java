@@ -97,7 +97,7 @@ public class MoveElevator extends Command {
                 break;
             case "Up":
                 Robot.elevator.lowScrewUp();
-                //Robot.elevator.highScrewUp();
+                Robot.elevator.highScrewUp();
                 break;
             case "CargoShip":
                 Robot.elevator.cargoShip();
