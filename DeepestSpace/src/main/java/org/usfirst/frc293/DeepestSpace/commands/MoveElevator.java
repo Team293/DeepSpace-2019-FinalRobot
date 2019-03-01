@@ -97,7 +97,7 @@ public class MoveElevator extends Command {
                 break;
             case "Up":
                 Robot.elevator.lowScrewUp();
-                //Robot.elevator.highScrewUp();
+                Robot.elevator.highScrewUp();
                 break;
             case "CargoShip":
                 Robot.elevator.cargoShip();
@@ -111,7 +111,7 @@ public class MoveElevator extends Command {
                 }
 
             default:
-                throw new IllegalArgumentException("Look in MoveElevator " + m_Location);
+                System.out.println("Look in MoveElevator " + m_Location);
                 
 
 
