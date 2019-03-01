@@ -141,4 +141,8 @@ public class Arm extends PIDSubsystem {
     public void enableArm(){
         enable();
     }
+    public void moveUpAmount(double amount){
+        setSetpoint(getPIDController().getSetpoint() + (amount * 4.94));
+    }
+
 }
