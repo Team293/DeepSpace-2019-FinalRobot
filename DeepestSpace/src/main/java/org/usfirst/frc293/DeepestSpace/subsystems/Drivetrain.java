@@ -177,6 +177,7 @@ public class Drivetrain extends Subsystem {
         //Updating Angle From Gyro
         //TODO Wire Gyro
         gyroAngle = gyro.getAngle();
+        
         SmartDashboard.putNumber("Angle of Robot", gyroAngle);
     }
 
@@ -229,9 +230,9 @@ public class Drivetrain extends Subsystem {
         leftTalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0,4000);
         
     }*/
-    public void percentDrive(double speed){
-        leftTalon1.set(ControlMode.PercentOutput,0.25);
-        rightTalon1.set(ControlMode.PercentOutput,0.25);
+    public void percentDrive(double leftSpeed, double rightSpeed){
+        leftTalon1.set(ControlMode.PercentOutput,leftSpeed);
+        rightTalon1.set(ControlMode.PercentOutput,rightSpeed);
     }
     
 
@@ -239,5 +240,19 @@ public class Drivetrain extends Subsystem {
     public void dumbDrive(){
         leftTalon1.set(Robot.oi.getLeftJoy().getY());
         rightTalon1.set(Robot.oi.getRightJoy().getY());
+    }
+    
+    public double getYawRobot(){
+        return gyro.getYaw();
+    }
+    public double getAngleRobot(){
+        return gyro.getAngle();
+    }
+    
+    public WPI_TalonSRX getLeftLeadTalon(){
+        return leftTalon1;
+    }
+    public WPI_TalonSRX getRightLeadTalon(){
+        return rightTalon1;
     }
 }
