@@ -69,6 +69,8 @@ public class Arm extends PIDSubsystem {
         armTalon.setNeutralMode(NeutralMode.Brake);
         armTalon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         armTalon.configFeedbackNotContinuous(true, 4000);
+        armTalon.configForwardSoftLimitEnable(true);
+        armTalon.configForwardSoftLimitThreshold(getAngleRawUnits(112));
 
         
 
@@ -76,7 +78,7 @@ public class Arm extends PIDSubsystem {
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
-       setAngle(47.);
+       setAngle(90);
         enable();
     }
 
@@ -121,18 +123,22 @@ public class Arm extends PIDSubsystem {
 
     // Use this function and not the setSetpoint function
     public void setAngle(double angle){
-        double rawAngle = (angle * 4.94) + 330.0;
+        double rawAngle = (angle * 4.94) + 380.0;
         setSetpoint(rawAngle);
+    }
+    public int getAngleRawUnits(int angle){
+        int rawAngle = (angle * 5) + 380;
+        return rawAngle;
     }
 
     // Makes the Arm move manually w/ out PID
     public void armUp(){
         disable();
-        armTalon.set(0.25);
+        armTalon.set(0.75);
     }
     public void armDown(){
         disable();
-        armTalon.set(-0.25);
+        armTalon.set(-0.75);
     }
     public void armStop(){
         disable();

@@ -61,6 +61,5 @@ public class PusherIn extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-        Robot.gripper.pusherIn();
     }
 }

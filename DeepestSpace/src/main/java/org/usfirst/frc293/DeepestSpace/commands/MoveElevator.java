@@ -55,43 +55,43 @@ public class MoveElevator extends Command {
         switch (m_Location){
             case "Ground":
                 Robot.elevator.ground();
-                Robot.arm.setAngle(armSetpoints[4]);
+                Robot.arm.setAngle(armSetpoints[3]);
                 Robot.buttonLights.turnAllOff();
                 Robot.buttonLights.setButtonLight(9, Robot.elevator.atPosition(Robot.elevator.groundSet));
                 break;
             case "LowHatch":
                 Robot.elevator.lowHatch();
-                Robot.arm.setAngle(armSetpoints[3]);
+                Robot.arm.setAngle(armSetpoints[2]);
                 Robot.buttonLights.turnAllOff();
                 Robot.buttonLights.setButtonLight(5, Robot.elevator.atPosition(Robot.elevator.lowHatchSet));
                 break;
             case "LowCargo":
                 Robot.elevator.lowCargo();
-                Robot.arm.setAngle(armSetpoints[2]);
+                Robot.arm.setAngle(armSetpoints[1]);
                 Robot.buttonLights.turnAllOff();
                 Robot.buttonLights.setButtonLight(6, Robot.elevator.atPosition(Robot.elevator.lowCargoSet));
                 break;
             case "MidHatch":
                 Robot.elevator.midHatch();
-                Robot.arm.setAngle(armSetpoints[3]);
+                Robot.arm.setAngle(armSetpoints[2]);
                 Robot.buttonLights.turnAllOff();
                 Robot.buttonLights.setButtonLight(3, Robot.elevator.atPosition(Robot.elevator.midHatchSet));
                 break;
             case "MidCargo":
                 Robot.elevator.midCargo();
-                Robot.arm.setAngle(armSetpoints[2]);
+                Robot.arm.setAngle(armSetpoints[1]);
                 Robot.buttonLights.turnAllOff();
                 Robot.buttonLights.setButtonLight(4, Robot.elevator.atPosition(Robot.elevator.midCargoSet));
                 break;
             case "HighHatch":
                 Robot.elevator.highHatch();
-                Robot.arm.setAngle(armSetpoints[3]);
+                Robot.arm.setAngle(armSetpoints[2]);
                 Robot.buttonLights.turnAllOff();
                 Robot.buttonLights.setButtonLight(1, Robot.elevator.atPosition(Robot.elevator.highHatchSet));
                 break;
             case "HighCargo":
                 Robot.elevator.highCargo();
-                Robot.arm.setAngle(armSetpoints[2]);
+                Robot.arm.setAngle(armSetpoints[1]);
                 Robot.buttonLights.turnAllOff();
                 Robot.buttonLights.setButtonLight(2, Robot.elevator.atPosition(Robot.elevator.highCargoSet));
                 break;
@@ -101,17 +101,20 @@ public class MoveElevator extends Command {
                 break;
             case "CargoShip":
                 Robot.elevator.cargoShip();
-                Robot.arm.setAngle(armSetpoints[3]);
+                Robot.arm.setAngle(armSetpoints[2]);
                 Robot.buttonLights.turnAllOff();
                 Robot.buttonLights.setButtonLight(8, Robot.elevator.atPosition(Robot.elevator.cargoShipSet));
+                break;
             case "Stow":
                 Robot.elevator.stow();
                 if(Robot.elevator.atPosition(Robot.elevator.stowSet)){
-                    Robot.arm.setAngle(armSetpoints[2]);
+                    Robot.arm.setAngle(armSetpoints[0]);
                 }
+                break;
 
             default:
                 System.out.println("Look in MoveElevator " + m_Location);
+                break;
                 
 
 
