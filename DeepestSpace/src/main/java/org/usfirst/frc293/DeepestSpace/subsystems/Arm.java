@@ -69,8 +69,8 @@ public class Arm extends PIDSubsystem {
         armTalon.setNeutralMode(NeutralMode.Brake);
         armTalon.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen);
         armTalon.configFeedbackNotContinuous(true, 4000);
-        armTalon.configForwardSoftLimitEnable(true);
-        armTalon.configForwardSoftLimitThreshold(getAngleRawUnits(112));
+        // armTalon.configForwardSoftLimitEnable(true);
+        // armTalon.configForwardSoftLimitThreshold(getAngleRawUnits(112));
 
         
 

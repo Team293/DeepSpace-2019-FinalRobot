@@ -78,16 +78,16 @@ public class Elevator extends Subsystem {
     
 
     // Settings For Elevator (Inches)
-    // High Screw, Low Screw, Piston}
+    // High Screw, Low Screw, Piston}u
     public double[]
         groundSet = {0,0,0},
-        lowHatchSet = {6,2.5,0}, //used to be (0,0,0)
-        lowCargoSet = {3.5,3,0},
-        midHatchSet = {24,11,0},
-        midCargoSet = {24,4,0},
+        lowHatchSet = {0,8.5,0}, //used to be (0,0,0)
+        lowCargoSet = {0,4.5,0},
+        midHatchSet = {0,7,1},
+        midCargoSet = {0,4,1},
         highHatchSet = {21,10.5,1}, //used to be (23,18,1)
         highCargoSet = {15.5,10.5,1},
-        cargoShipSet = {5,5,0},
+        cargoShipSet = {0,5,1},
         stowSet = {16,0,0};
     
     private double gearRatio = 11.0/8.0;
@@ -139,8 +139,8 @@ public class Elevator extends Subsystem {
         lowerScrewTalon.configMotionCruiseVelocity(maxVel);
         lowerScrewTalon.setNeutralMode(NeutralMode.Brake);
 
-        // lowerScrewTalon.configForwardSoftLimitEnable(true);
-        // lowerScrewTalon.configForwardSoftLimitThreshold(73216,4000);
+        lowerScrewTalon.configForwardSoftLimitEnable(true);
+        lowerScrewTalon.configForwardSoftLimitThreshold(73216,4000);
 
         // setting encoder to stow values
         // NOTE: This logic assumes that the robot starts in the STOW position!
@@ -226,10 +226,10 @@ public class Elevator extends Subsystem {
 
     //Base Methods for Low Screw (See Above)
     public void highScrewUp(){
-        upperScrewTalon.set(-1);
+        upperScrewTalon.set(1);
     }
     public void highScrewDown(){
-        upperScrewTalon.set(1);
+        upperScrewTalon.set(-1);
     }
     public void highScrewStop(){
         upperScrewTalon.set(0);
