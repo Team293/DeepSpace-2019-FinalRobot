@@ -161,7 +161,6 @@ public class OI {
 
 
         // SmartDashboard Buttons
-        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("DriveWJoystick", new DriveWJoystick());
         SmartDashboard.putData("GripOpen", new GripOpen());
         SmartDashboard.putData("GripClose", new GripClose());
@@ -172,7 +171,7 @@ public class OI {
         SmartDashboard.putData("FrontStiltsUp", new FrontStiltsUp());
         SmartDashboard.putData("FrontStiltsDown", new FrontStiltsDown());
         SmartDashboard.putData("ClimberForward", new ClimberForward());
-        SmartDashboard.putData("MoveElevator", new MoveElevator("LowHatch"));
+        SmartDashboard.putData("MoveElevator", new MoveElevator("LowCargo"));
         SmartDashboard.putData("DriveForward", new DriveForward());
         SmartDashboard.putData("ArmToAngle", new ArmToAngle(20.0));
         SmartDashboard.putData("Shoot", new Shoot());

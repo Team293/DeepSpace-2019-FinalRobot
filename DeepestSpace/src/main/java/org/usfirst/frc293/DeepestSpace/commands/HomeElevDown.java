@@ -44,12 +44,12 @@ public class HomeElevDown extends Command {
     @Override
     protected void execute() {
         Robot.elevator.elevatorDown();
-        if(Robot.elevator.highScrewLowLimit()){
+        /*if(Robot.elevator.highScrewLowLimit()){
             Robot.elevator.resetLowEnc();
         }
         else{
             Robot.elevator.highScrewDown();
-        }
+        }*/
         if(Robot.elevator.lowScrewLowLimit()){
             Robot.elevator.resetLowEnc();
         }
@@ -73,7 +73,7 @@ public class HomeElevDown extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-        Robot.elevator.highScrewStop();
+        //Robot.elevator.highScrewStop();
         Robot.elevator.lowScrewStop();
     }
 }

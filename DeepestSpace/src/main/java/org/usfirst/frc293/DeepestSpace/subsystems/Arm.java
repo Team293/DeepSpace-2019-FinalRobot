@@ -78,7 +78,6 @@ public class Arm extends PIDSubsystem {
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
-       setAngle(90);
         enable();
     }
 
