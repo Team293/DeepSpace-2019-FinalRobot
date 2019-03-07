@@ -39,6 +39,7 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
 /**
  *
  */
@@ -83,7 +84,9 @@ public class Drivetrain extends Subsystem {
 
         leftMotor1 = new CANSparkMax(4, MotorType.kBrushless);
         leftMotor1.setInverted(true);
+        leftMotor1.setIdleMode(IdleMode.kCoast);
         leftMotor2 = new CANSparkMax(5, MotorType.kBrushless);
+        leftMotor2.setIdleMode(IdleMode.kCoast);
         leftMotor2.follow(leftMotor1);
         leftEncoder = leftMotor1.getEncoder();
         //TODO Confirm
@@ -95,6 +98,8 @@ public class Drivetrain extends Subsystem {
         
         rightMotor1 = new CANSparkMax(2, MotorType.kBrushless);
         rightMotor2 = new CANSparkMax(3, MotorType.kBrushless);
+        rightMotor1.setIdleMode(IdleMode.kCoast);
+        rightMotor2.setIdleMode(IdleMode.kCoast);
         rightMotor2.follow(rightMotor1);
         rightEncoder = rightMotor1.getEncoder();
         rightEncoder.setPositionConversionFactor(0.25);
