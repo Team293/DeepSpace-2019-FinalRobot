@@ -61,8 +61,10 @@ public class OI {
     public JoystickButton moveElevLowCargo;
     public JoystickButton moveElevMidHatch;
     public JoystickButton moveElevMidCargo;
-    public JoystickButton moveElevHighHatch;
-    public JoystickButton moveElevHighCargo;
+    public JoystickButton frontClimberDeployB;
+    public JoystickButton frontClimberRetractB;
+    public JoystickButton backClimberDeployB;
+    public JoystickButton backClimberRetractB;
     public Joystick opLeftJoy;
     public JoystickButton shootB;
     public JoystickButton openGripB;
@@ -71,17 +73,13 @@ public class OI {
     public JoystickButton armUpButton;
     public JoystickButton pusherOutB;
     public JoystickButton homeDownB;
-    public JoystickButton moveTopUpB;
-    public JoystickButton moveTopDownB;
     public JoystickButton moveBottomDownB;
     public JoystickButton moveBottomUpB;
     public Joystick opRightJoy;
     public JoystickButton lowCargoB;
     public JoystickButton midCargoB;
-    public JoystickButton highCargoB;
     public JoystickButton lowHatchB;
     public JoystickButton midHatchB;
-    public JoystickButton highHatchB;
     public JoystickButton cargoB;
     public JoystickButton groundB;
     public JoystickButton stowB;
@@ -100,14 +98,10 @@ public class OI {
         groundB.whenPressed(new MoveElevator("Ground"));
         cargoB = new JoystickButton(buttonBoard, 7);
         cargoB.whenPressed(new MoveElevator("Cargo"));
-        highHatchB = new JoystickButton(buttonBoard, 6);
-        highHatchB.whenPressed(new MoveElevator("HighHatch"));
         midHatchB = new JoystickButton(buttonBoard, 5);
         midHatchB.whenPressed(new MoveElevator("MidHatch"));
         lowHatchB = new JoystickButton(buttonBoard, 4);
         lowHatchB.whenPressed(new MoveElevator("LowHatch"));
-        highCargoB = new JoystickButton(buttonBoard, 3);
-        highCargoB.whenPressed(new MoveElevator("HighCargo"));
         midCargoB = new JoystickButton(buttonBoard, 2);
         midCargoB.whenPressed(new MoveElevator("MidCargo"));
         lowCargoB = new JoystickButton(buttonBoard, 1);
@@ -118,10 +112,6 @@ public class OI {
         moveBottomUpB.whileHeld(new MoveBottomUp());
         moveBottomDownB = new JoystickButton(opRightJoy, 11);
         moveBottomDownB.whileHeld(new MoveBottomDown());
-        moveTopDownB = new JoystickButton(opRightJoy, 9);
-        moveTopDownB.whileHeld(new MoveTopDown());
-        moveTopUpB = new JoystickButton(opRightJoy, 10);
-        moveTopUpB.whileHeld(new MoveTopUp());
         homeDownB = new JoystickButton(opRightJoy, 7);
         homeDownB.whenPressed(new HomeElevDown());
         pusherOutB = new JoystickButton(opRightJoy, 2);
@@ -138,10 +128,14 @@ public class OI {
         shootB.whenPressed(new Shoot());
         opLeftJoy = new Joystick(3);
         
-        moveElevHighCargo = new JoystickButton(opLeftJoy, 8);
-        moveElevHighCargo.whileHeld(new MoveElevator("HighCargo"));
-        moveElevHighHatch = new JoystickButton(opLeftJoy, 7);
-        moveElevHighHatch.whileHeld(new MoveElevator("HighHatch"));
+        backClimberRetractB = new JoystickButton(opLeftJoy, 4);
+        backClimberRetractB.whileHeld(new BackClimberRetract());
+        backClimberDeployB = new JoystickButton(opLeftJoy, 6);
+        backClimberDeployB.whileHeld(new BackClimberDeploy());
+        frontClimberRetractB = new JoystickButton(opLeftJoy, 4);
+        frontClimberRetractB.whileHeld(new FrontClimberRetract());
+        frontClimberDeployB = new JoystickButton(opLeftJoy, 6);
+        frontClimberDeployB.whileHeld(new FrontClimberDeploy());
         moveElevMidCargo = new JoystickButton(opLeftJoy, 10);
         moveElevMidCargo.whileHeld(new MoveElevator("MidCargo"));
         moveElevMidHatch = new JoystickButton(opLeftJoy, 9);
@@ -166,24 +160,23 @@ public class OI {
         SmartDashboard.putData("GripClose", new GripClose());
         SmartDashboard.putData("PusherIn", new PusherIn());
         SmartDashboard.putData("PusherOut", new PusherOut());
-        SmartDashboard.putData("BackStiltsUp", new BackStiltsUp());
-        SmartDashboard.putData("BackStiltsDown", new BackStiltsDown());
-        SmartDashboard.putData("FrontStiltsUp", new FrontStiltsUp());
-        SmartDashboard.putData("FrontStiltsDown", new FrontStiltsDown());
-        SmartDashboard.putData("ClimberForward", new ClimberForward());
-        SmartDashboard.putData("MoveElevator", new MoveElevator("LowCargo"));
+        SmartDashboard.putData("MoveElevator", new MoveElevator(""));
         SmartDashboard.putData("DriveForward", new DriveForward());
-        SmartDashboard.putData("ArmToAngle", new ArmToAngle(20.0));
+        SmartDashboard.putData("ArmToAngle", new ArmToAngle(0));
         SmartDashboard.putData("Shoot", new Shoot());
         SmartDashboard.putData("ArmDown", new ArmDown());
         SmartDashboard.putData("ArmUp", new ArmUp());
         SmartDashboard.putData("MoveBottomDown", new MoveBottomDown());
         SmartDashboard.putData("MoveBottomUp", new MoveBottomUp());
-        SmartDashboard.putData("MoveTopDown", new MoveTopDown());
-        SmartDashboard.putData("MoveTopUp", new MoveTopUp());
         SmartDashboard.putData("HomeElevDown", new HomeElevDown());
         SmartDashboard.putData("PusherTimed", new PusherTimed());
         SmartDashboard.putData("GripperOpenTimed", new GripperOpenTimed());
+        SmartDashboard.putData("FrontClimberDeploy", new FrontClimberDeploy());
+        SmartDashboard.putData("FrontClimberRetract", new FrontClimberRetract());
+        SmartDashboard.putData("BackClimberDeploy", new BackClimberDeploy());
+        SmartDashboard.putData("BackClimberRetract", new BackClimberRetract());
+        SmartDashboard.putData("ClimberForward", new ClimberForward());
+        SmartDashboard.putData("ClimberBackward", new ClimberBackward());
 
     // END AUTOGENERATED CODE, SOURCE=ROBOTBUILDER ID=CONSTRUCTORS
     }

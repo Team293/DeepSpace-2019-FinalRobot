@@ -83,18 +83,6 @@ public class MoveElevator extends Command {
                 Robot.buttonLights.turnAllOff();
                 Robot.buttonLights.setButtonLight(4, Robot.elevator.atPosition(Robot.elevator.midCargoSet));
                 break;
-            case "HighHatch":
-                Robot.elevator.highHatch();
-                Robot.arm.setAngle(armSetpoints[2]);
-                Robot.buttonLights.turnAllOff();
-                Robot.buttonLights.setButtonLight(1, Robot.elevator.atPosition(Robot.elevator.highHatchSet));
-                break;
-            case "HighCargo":
-                Robot.elevator.highCargo();
-                Robot.arm.setAngle(armSetpoints[1]);
-                Robot.buttonLights.turnAllOff();
-                Robot.buttonLights.setButtonLight(2, Robot.elevator.atPosition(Robot.elevator.highCargoSet));
-                break;
             /*case "Up":
                 Robot.elevator.lowScrewUp();
                 Robot.elevator.highScrewUp();
