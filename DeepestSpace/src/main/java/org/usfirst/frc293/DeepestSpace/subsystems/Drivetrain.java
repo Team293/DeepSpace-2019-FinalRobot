@@ -37,6 +37,7 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.ControlType;
+import com.analog.adis16448.frc.ADIS16448_IMU;
 
 /**
  *
@@ -70,10 +71,12 @@ public class Drivetrain extends Subsystem {
     //Smart Stuff that is Smart
     //Units are in RPM (Theoretically)
     //I don't trust the documentation though
-    double maxVel = 3000;
-    double minVel = 1000;
-    double maxAcc = 3000;
-    double minAcc = 1000;
+    double maxVel = 5700;
+    double minVel = 0;
+    double maxAcc = 1000;
+    int smartMotionSlot = 0;
+
+    ADIS16448_IMU imu;
 
     
     public Drivetrain() {
@@ -87,6 +90,9 @@ public class Drivetrain extends Subsystem {
         leftEncoder.setPositionConversionFactor(0.25);
         leftPID = leftMotor1.getPIDController();
         leftPID.setOutputRange(minOutput, maxOutput);
+        leftPID.setSmartMotionMaxVelocity(maxVel, smartMotionSlot);
+        leftPID.setSmartMotionMinOutputVelocity(minVel, smartMotionSlot);
+        leftPID.setSmartMotionMaxAccel(maxAcc, smartMotionSlot);
         
         
         
@@ -97,6 +103,9 @@ public class Drivetrain extends Subsystem {
         rightEncoder.setPositionConversionFactor(0.25);
         rightPID = rightMotor1.getPIDController();
         rightPID.setOutputRange(minOutput, maxOutput); 
+        rightPID.setSmartMotionMaxVelocity(maxVel, smartMotionSlot);
+        rightPID.setSmartMotionMinOutputVelocity(minVel, smartMotionSlot);
+        rightPID.setSmartMotionMaxAccel(maxAcc, smartMotionSlot);
         
 
         leftPID.setP(kP);
@@ -109,6 +118,8 @@ public class Drivetrain extends Subsystem {
         rightPID.setI(kI);
         rightPID.setD(kD);
         rightPID.setFF(kF);
+
+        imu = new ADIS16448_IMU();
 
     }
 
@@ -143,6 +154,19 @@ public class Drivetrain extends Subsystem {
         SmartDashboard.putNumber("angle displacement of robot to target",targetInfo[4]);
         SmartDashboard.putNumber("angle displacement of target to robot", targetInfo[5]);
 
+        SmartDashboard.putNumber("Gyro-X", imu.getAngleX());
+        SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
+        SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
+        
+        SmartDashboard.putNumber("Accel-X", imu.getAccelX());
+        SmartDashboard.putNumber("Accel-Y", imu.getAccelY());
+        SmartDashboard.putNumber("Accel-Z", imu.getAccelZ());
+        
+        SmartDashboard.putNumber("Pitch", imu.getPitch());
+        SmartDashboard.putNumber("Roll", imu.getRoll());
+        SmartDashboard.putNumber("Yaw", imu.getYaw());
+     
+
 
     }
 
@@ -169,6 +193,22 @@ public class Drivetrain extends Subsystem {
         
         leftPID.setReference(leftSetpoint, ControlType.kVelocity);
         rightPID.setReference(rightSetpoint, ControlType.kVelocity);
+    }
+    public void smartDrive(Joystick left, Joystick right){
+        double leftSetpoint = 0;
+        double rightSetpoint = 0;
+        double leftPos = left.getY();
+        double rightPos = right.getY();
+        if(Math.abs(leftPos) >= 0.13){
+            leftSetpoint = leftPos * maxRpm * speed * 0.5;
+        }
+        if(Math.abs(rightPos) >= 0.1){
+            rightSetpoint = rightPos * maxRpm * speed * 0.5;
+        }
+        
+        
+        leftPID.setReference(leftSetpoint, ControlType.kSmartVelocity);
+        rightPID.setReference(rightSetpoint, ControlType.kSmartVelocity);
     }
     
     public void distance(double rotations){
