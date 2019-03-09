@@ -77,7 +77,7 @@ public class Elevator extends Subsystem {
     
 
     // Settings For Elevator (Inches)
-    // High Screw, Low Screw, Piston}u
+    // High Screw, Low Screw, Piston}
     public double[]
         groundSet = {0,0,0},
         lowHatchSet = {0,8.5,0}, //used to be (0,0,0)
@@ -85,7 +85,7 @@ public class Elevator extends Subsystem {
         midHatchSet = {0,7,1},
         midCargoSet = {0,4,1},
         cargoShipSet = {0,5,1},
-        stowSet = {16,0,0};
+        stowSet = {0,12.5,0};
     
     private double gearRatio = 11.0/8.0;
         
