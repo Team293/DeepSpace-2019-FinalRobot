@@ -37,7 +37,6 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.ControlType;
-import com.analog.adis16448.frc.ADIS16448_IMU;
 /**
  *
  */
@@ -63,7 +62,7 @@ public class Drivetrain extends Subsystem {
     double kD = 0;
     double kF = 0;
     double speed = 1.0;
-    double maxRpm = 5700.0;
+    double maxRpm = 6000.0;
     double minOutput = -1;
     double maxOutput = 1; 
 
@@ -75,7 +74,6 @@ public class Drivetrain extends Subsystem {
     double maxAcc = 3000;
     double minAcc = 1000;
 
-    ADIS16448_IMU imu;
 
     public Drivetrain() {
 
@@ -111,7 +109,6 @@ public class Drivetrain extends Subsystem {
         rightPID.setD(kD);
         rightPID.setFF(kF);
 
-        imu = new ADIS16448_IMU();
     }
 
     @Override
@@ -130,28 +127,21 @@ public class Drivetrain extends Subsystem {
     public void periodic() {
         // Put code here to be run every loop
         if(Robot.oi.getLeftJoy().getTrigger()||Robot.oi.getRightJoy().getTrigger()){
-            speed = 0.25;
+            speed = 0.5;
         }
         else{
             speed = 1.0;
         }
         SmartDashboard.putNumber("Left Encoder RPM", leftEncoder.getVelocity());
         SmartDashboard.putNumber("Right Encoder RPM", rightEncoder.getVelocity());
+        
+        double[] tempArray = {0,0,0,0,0,0};
+        double[] targetInfo = SmartDashboard.getNumberArray("vision/target_info",tempArray);
 
-        SmartDashboard.putNumber("Gyro-X", imu.getAngleX());
-        SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
-        SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
-        
-        SmartDashboard.putNumber("Accel-X", imu.getAccelX());
-        SmartDashboard.putNumber("Accel-Y", imu.getAccelY());
-        SmartDashboard.putNumber("Accel-Z", imu.getAccelZ());
-        
-        SmartDashboard.putNumber("Pitch", imu.getPitch());
-        SmartDashboard.putNumber("Roll", imu.getRoll());
-        SmartDashboard.putNumber("Yaw", imu.getYaw());
-        
-        SmartDashboard.putNumber("Pressure: ", imu.getBarometricPressure());
-        SmartDashboard.putNumber("Temperature: ", imu.getTemperature()); 
+        SmartDashboard.putNumber("Inches to Target", targetInfo[3]);
+        SmartDashboard.putNumber("angle displacement of robot to target",targetInfo[4]);
+        SmartDashboard.putNumber("angle displacement of target to robot", targetInfo[5]);
+
 
     }
 
@@ -164,8 +154,18 @@ public class Drivetrain extends Subsystem {
     // here. Call these from Commands.
 
     public void velocityDrive(Joystick left, Joystick right){
-        double leftSetpoint = left.getY() * maxRpm * speed;
-        double rightSetpoint = right.getY() * maxRpm * speed;
+        double leftSetpoint = 0;
+        double rightSetpoint = 0;
+        double leftPos = left.getY();
+        double rightPos = right.getY();
+        if(Math.abs(leftPos) >= 0.13){
+            leftSetpoint = leftPos * maxRpm * speed * 0.5;
+        }
+        if(Math.abs(rightPos) >= 0.1){
+            rightSetpoint = rightPos * maxRpm * speed * 0.5;
+        }
+        
+        
         leftPID.setReference(leftSetpoint, ControlType.kVelocity);
         rightPID.setReference(rightSetpoint, ControlType.kVelocity);
     }
