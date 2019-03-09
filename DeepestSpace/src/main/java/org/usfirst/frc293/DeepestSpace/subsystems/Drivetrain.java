@@ -37,6 +37,7 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.ControlType;
+
 /**
  *
  */
@@ -74,7 +75,7 @@ public class Drivetrain extends Subsystem {
     double maxAcc = 3000;
     double minAcc = 1000;
 
-
+    
     public Drivetrain() {
 
         leftMotor1 = new CANSparkMax(4, MotorType.kBrushless);
@@ -127,7 +128,7 @@ public class Drivetrain extends Subsystem {
     public void periodic() {
         // Put code here to be run every loop
         if(Robot.oi.getLeftJoy().getTrigger()||Robot.oi.getRightJoy().getTrigger()){
-            speed = 0.5;
+            speed = 0.25;
         }
         else{
             speed = 1.0;
