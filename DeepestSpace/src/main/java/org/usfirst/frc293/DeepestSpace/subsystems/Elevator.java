@@ -77,15 +77,15 @@ public class Elevator extends Subsystem {
     
 
     // Settings For Elevator (Inches)
-    // High Screw, Low Screw, Piston}
+    // Low Screw, Piston}
     public double[]
-        groundSet = {0,0,0},
-        lowHatchSet = {0,8.5,0}, //used to be (0,0,0)
-        lowCargoSet = {0,4.5,0},
-        midHatchSet = {0,7,1},
-        midCargoSet = {0,4,1},
-        cargoShipSet = {0,5,1},
-        stowSet = {0,12.5,0};
+        groundSet = {0,0},
+        lowHatchSet = {8.5,0}, //used to be (0,0,0)
+        lowCargoSet = {4.5,0},
+        midHatchSet = {7,1},
+        midCargoSet = {4,1},
+        cargoShipSet = {5,1},
+        stowSet = {12.5,0};
     
     private double gearRatio = 11.0/8.0;
         
@@ -211,15 +211,15 @@ public class Elevator extends Subsystem {
         return (quadValue/4096.0) * (0.727272);
     }
     public void elevatorLogic(double[] setpoints){
-        lowerScrewTalon.set(ControlMode.Position,setpoints[1]*gearRatio * 4096);
+        lowerScrewTalon.set(ControlMode.Position,setpoints[0]*gearRatio * 4096);
 
         //Reversed bc Solenoid is reversed
-        if(setpoints[2] == 0){
+        if(setpoints[1] == 0){
             if(elevatorPiston.get() == Value.kReverse|| elevatorPiston.get() == Value.kOff){
                 elevatorDown();
             }
         }
-        else if(setpoints[2] == 1){
+        else if(setpoints[1] == 1){
             if(elevatorPiston.get() == Value.kForward || elevatorPiston.get() == Value.kOff){
                 elevatorUp();
             }
@@ -227,13 +227,13 @@ public class Elevator extends Subsystem {
         
     }
     public void elevatorMagic(double[] setpoints){
-        lowerScrewTalon.set(ControlMode.MotionMagic,setpoints[1]*gearRatio);
-        if(setpoints[2] == 0){
+        lowerScrewTalon.set(ControlMode.MotionMagic,setpoints[0]*gearRatio);
+        if(setpoints[1] == 0){
             if(elevatorPiston.get() == Value.kForward|| elevatorPiston.get() == Value.kOff){
                 elevatorDown();
             }
         }
-        else if(setpoints[2] == 1){
+        else if(setpoints[1] == 1){
             if(elevatorPiston.get() == Value.kReverse || elevatorPiston.get() == Value.kOff){
                 elevatorUp();
             }
@@ -263,13 +263,9 @@ public class Elevator extends Subsystem {
     }
 
     public boolean atPosition(double[] setpoints){
-        double highAbsDif = 0.0;//getHighInch()+setpoints[0];
-        SmartDashboard.putNumber("High Screw Dif",highAbsDif);
         double lowAbsDif = getLowInch()+setpoints[1];
         SmartDashboard.putNumber("Low Screw Dif",lowAbsDif);
-        double totalError = Math.abs(highAbsDif + lowAbsDif);
-        SmartDashboard.putNumber("Total Dif",totalError);
-        if(totalError <= 1){
+        if(lowAbsDif <= 1){
             return true;
         }
         else{

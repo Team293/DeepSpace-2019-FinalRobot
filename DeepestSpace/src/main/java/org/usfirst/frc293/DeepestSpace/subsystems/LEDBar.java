@@ -86,7 +86,6 @@ public class LEDBar extends Subsystem {
     // here. Call these from Commands.
 
     // LED methods
-
     public void redOn(boolean state){
         redOutput.set(state);
     }
@@ -112,6 +111,8 @@ public class LEDBar extends Subsystem {
             redOn(false);
         }
     }
+
+    // making methods to get outside variables
     public void setSolutionFound(boolean found){
         solutionFound = found;
         LEDlogic();
