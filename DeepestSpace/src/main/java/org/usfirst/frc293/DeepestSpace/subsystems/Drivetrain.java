@@ -85,6 +85,13 @@ public class Drivetrain extends Subsystem {
 
     ADIS16448_IMU imu;
 
+    double[] runningAvgArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    int intBuffer = 10;
+    int runningCount = 0;
+    double runningAvgY = 0.0;
+    double avgCount = -0.0;
+
+    double kTurn;
     
     public Drivetrain() {
 
@@ -166,6 +173,7 @@ public class Drivetrain extends Subsystem {
         else{
             speed = 1.0;
         }
+
         SmartDashboard.putNumber("Left Encoder RPM", leftEncoder.getVelocity());
         SmartDashboard.putNumber("Right Encoder RPM", rightEncoder.getVelocity());
         
@@ -176,19 +184,21 @@ public class Drivetrain extends Subsystem {
         SmartDashboard.putNumber("angle displacement of robot to target",targetInfo[4]);
         SmartDashboard.putNumber("angle displacement of target to robot", targetInfo[5]);
 
-        SmartDashboard.putNumber("Gyro-X", imu.getAngleX());
-        SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
-        SmartDashboard.putNumber("Gyro-Z", imu.getAngleZ());
-        
-        SmartDashboard.putNumber("Accel-X", imu.getAccelX());
-        SmartDashboard.putNumber("Accel-Y", imu.getAccelY());
-        SmartDashboard.putNumber("Accel-Z", imu.getAccelZ());
-        
-        SmartDashboard.putNumber("Pitch", imu.getPitch());
-        SmartDashboard.putNumber("Roll", imu.getRoll());
-        SmartDashboard.putNumber("Yaw", imu.getYaw());
-     
+        //Running Average for Y rate
+        runningAvgArray[(runningCount%intBuffer)] = -imu.getRateY();
+        avgCount = 0;
+        for(int i = 0; i <= intBuffer; i++){
+            avgCount += runningAvgArray[i];
+        }
+        runningAvgY = avgCount/(((double)intBuffer) + 1.0);
+        runningCount++;
 
+        SmartDashboard.putNumberArray("RunningAvgArray", runningAvgArray);
+        SmartDashboard.putNumber("Avg Count", avgCount);
+        SmartDashboard.putNumber("Running Avg Y Rate", runningAvgY);
+        SmartDashboard.putNumber("Y Rate Walking", imu.getRateY());
+
+        kTurn = 0.5 * (leftEncoder.getVelocity() + rightEncoder.getVelocity());
 
     }
 
@@ -207,9 +217,11 @@ public class Drivetrain extends Subsystem {
         double rightPos = right.getY();
         if(Math.abs(leftPos) >= 0.13){
             leftSetpoint = leftPos * maxRpm * speed * 0.5;
+            leftSetpoint -=kTurn;
         }
         if(Math.abs(rightPos) >= 0.1){
             rightSetpoint = rightPos * maxRpm * speed * 0.5;
+            rightSetpoint += kTurn;
         }
         
         
@@ -222,10 +234,12 @@ public class Drivetrain extends Subsystem {
         double leftPos = left.getY();
         double rightPos = right.getY();
         if(Math.abs(leftPos) >= 0.13){
-            leftSetpoint = leftPos * maxRpm * speed * 0.5;
+            leftSetpoint = leftPos * maxRpm * speed;
+            leftSetpoint -= kTurn;
         }
         if(Math.abs(rightPos) >= 0.1){
-            rightSetpoint = rightPos * maxRpm * speed * 0.5;
+            rightSetpoint = rightPos * maxRpm * speed;
+            rightSetpoint += kTurn;
         }
         
         
