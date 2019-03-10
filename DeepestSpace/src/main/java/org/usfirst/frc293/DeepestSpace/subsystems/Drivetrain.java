@@ -80,7 +80,7 @@ public class Drivetrain extends Subsystem {
     //I don't trust the documentation though
     double maxVel = 5700;
     double minVel = 0;
-    double maxAcc = 1000;
+    double maxAcc = 2000;
     int smartMotionSlot = 0;
 
     ADIS16448_IMU imu;
@@ -185,20 +185,16 @@ public class Drivetrain extends Subsystem {
         SmartDashboard.putNumber("angle displacement of target to robot", targetInfo[5]);
 
         //Running Average for Y rate
-        runningAvgArray[(runningCount%intBuffer)] = -imu.getRateY();
+        runningCount = runningCount%intBuffer;
+        runningAvgArray[runningCount] = -imu.getRateY();
+        runningCount++;
         avgCount = 0;
         for(int i = 0; i <= intBuffer; i++){
             avgCount += runningAvgArray[i];
         }
-        runningAvgY = avgCount/(((double)intBuffer) + 1.0);
-        runningCount++;
-
-        SmartDashboard.putNumberArray("RunningAvgArray", runningAvgArray);
-        SmartDashboard.putNumber("Avg Count", avgCount);
-        SmartDashboard.putNumber("Running Avg Y Rate", runningAvgY);
-        SmartDashboard.putNumber("Y Rate Walking", imu.getRateY());
-
-        kTurn = 0.5 * (leftEncoder.getVelocity() + rightEncoder.getVelocity());
+        runningAvgY = avgCount/( ((double)intBuffer) + 1.0);
+ 
+        kTurn = 0.01 * 0.5 * (leftEncoder.getVelocity() + rightEncoder.getVelocity());
 
     }
 
@@ -217,13 +213,12 @@ public class Drivetrain extends Subsystem {
         double rightPos = right.getY();
         if(Math.abs(leftPos) >= 0.13){
             leftSetpoint = leftPos * maxRpm * speed * 0.5;
-            leftSetpoint -=kTurn;
+            leftSetpoint -= kTurn;
         }
         if(Math.abs(rightPos) >= 0.1){
             rightSetpoint = rightPos * maxRpm * speed * 0.5;
             rightSetpoint += kTurn;
         }
-        
         
         leftPID.setReference(leftSetpoint, ControlType.kVelocity);
         rightPID.setReference(rightSetpoint, ControlType.kVelocity);
