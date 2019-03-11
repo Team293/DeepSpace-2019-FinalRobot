@@ -163,7 +163,7 @@ public class OI {
         SmartDashboard.putData("GripClose", new GripClose());
         SmartDashboard.putData("PusherIn", new PusherIn());
         SmartDashboard.putData("PusherOut", new PusherOut());
-        SmartDashboard.putData("MoveElevator", new MoveElevator("LowHatch"));
+        SmartDashboard.putData("MoveElevator", new MoveElevator("LowCargo"));
         SmartDashboard.putData("DriveForward", new DriveForward());
         SmartDashboard.putData("ArmToAngle", new ArmToAngle(20));
         SmartDashboard.putData("Shoot", new Shoot());

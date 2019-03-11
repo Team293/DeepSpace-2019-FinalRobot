@@ -126,7 +126,7 @@ public class Arm extends PIDSubsystem {
         setSetpoint(rawAngle);
     }
     public int getAngleRawUnits(int angle){
-        int rawAngle = (angle * 5) + 380;
+        int rawAngle = (angle * 5) + 340;
         return rawAngle;
     }
 
