@@ -274,4 +274,8 @@ public class Drivetrain extends Subsystem {
     public double visionForm(double angleOfRobot,double angleOfTarget){
         return (visionCons * (angleOfRobot+angleOfTarget));
     }
+
+    // LED Logic
+    private boolean solutionFound = false;
+    private boolean autopilotEnable = false;
 }
