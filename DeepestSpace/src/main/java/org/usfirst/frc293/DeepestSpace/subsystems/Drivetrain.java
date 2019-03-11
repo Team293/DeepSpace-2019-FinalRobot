@@ -77,6 +77,7 @@ public class Drivetrain extends Subsystem {
     int smartMotionSlot = 0;
 
     ADIS16448_IMU imu;
+    double visionCons = 0.1;
 
     
     public Drivetrain() {
@@ -120,6 +121,7 @@ public class Drivetrain extends Subsystem {
         rightPID.setFF(kF);
 
         imu = new ADIS16448_IMU();
+        
 
     }
 
@@ -236,5 +238,9 @@ public class Drivetrain extends Subsystem {
     public void percentDrive(double speed){
         leftMotor1.set(0.25);
         rightMotor1.set(0.25);
+    }
+
+    public double visionForm(double angleOfRobot,double angleOfTarget){
+        return (visionCons * (angleOfRobot+angleOfTarget));
     }
 }
