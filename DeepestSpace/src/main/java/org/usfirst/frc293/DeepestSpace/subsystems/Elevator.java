@@ -215,14 +215,12 @@ public class Elevator extends Subsystem {
 
         //Reversed bc Solenoid is reversed
         if(setpoints[1] == 0){
-            if(elevatorPiston.get() == Value.kReverse|| elevatorPiston.get() == Value.kOff){
-                elevatorDown();
-            }
+            elevatorDown();
         }
         else if(setpoints[1] == 1){
-            if(elevatorPiston.get() == Value.kForward || elevatorPiston.get() == Value.kOff){
-                elevatorUp();
-            }
+
+            elevatorUp();
+
         }
         
     }
