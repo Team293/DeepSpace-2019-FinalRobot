@@ -53,12 +53,19 @@ public class FrontClimber extends Subsystem {
 
     // Front Climber Setpoint (inches)
     public double[]
-        hab3 = {19},
-        hab2 = {6};
+        hab3set = {19},
+        hab2set = {6};
 
     // math for converting raw encoder values to inches
     public void climberSetpoint(double[] setpoints){
         frontClimberTalon.set(ControlMode.MotionMagic, setpoints[0] * ((2*3.14)/1024));
+    }
+
+    public void hab3(){
+        climberSetpoint(hab3set);
+    }
+    public void hab2(){
+        climberSetpoint(hab2set);
     }
 
     public FrontClimber() {
