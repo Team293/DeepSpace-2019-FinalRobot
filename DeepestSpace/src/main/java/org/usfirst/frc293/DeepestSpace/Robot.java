@@ -40,6 +40,7 @@ public class Robot extends TimedRobot {
     public static Elevator elevator;
     public static FrontClimber frontClimber;
     public static BackClimber backClimber;
+    public static ClimberDriver climberDriver;
     public static Arm arm;
     public static ButtonLights buttonLights;
 
@@ -58,6 +59,8 @@ public class Robot extends TimedRobot {
         elevator = new Elevator();
         frontClimber = new FrontClimber();
         backClimber = new BackClimber();
+        climberDriver = new ClimberDriver();
+        SmartDashboard.putData(climberDriver);
         arm = new Arm();
         SmartDashboard.putData(arm);
         buttonLights = new ButtonLights();
