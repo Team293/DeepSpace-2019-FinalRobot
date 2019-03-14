@@ -48,9 +48,10 @@ public class FrontClimber extends Subsystem {
     private double kD = 0;
 
     // Front Climber Setpoint (inches)
-    public double
-        hab3set = 19,
-        hab2set = 6;
+    public double hab3set = 19;
+    public double hab2set = 6;
+    public double retract_set = 0;
+        
 
     final int ENCODER_COUNT = 4096;
 
@@ -65,11 +66,13 @@ public class FrontClimber extends Subsystem {
     public void hab2(){
         climberSetpoint(hab2set);
     }
+    public void retractFrontClimber(){
+        climberSetpoint(retract_set);
+    }
 
     //front climber velocity setpoints (rpm)
-    public double
-        HAB_VELOCITY = 30,
-        HOLD_VELOCITY = 0;
+    public double HAB_VELOCITY = 30;
+    public double HOLD_VELOCITY = 0;
 
     public void habVelocity(){
         climberVelocitySetpoint(HAB_VELOCITY);

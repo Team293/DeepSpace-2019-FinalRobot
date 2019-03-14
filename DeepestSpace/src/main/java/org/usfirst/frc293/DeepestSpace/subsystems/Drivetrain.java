@@ -182,7 +182,7 @@ public class Drivetrain extends Subsystem {
     public void periodic() {
         // Put code here to be run every loop
         if(Robot.oi.getLeftJoy().getTrigger()||Robot.oi.getRightJoy().getTrigger()){
-            speed = 0.25;
+            speed = 0.5;
         }
         else{
             speed = 1.0;

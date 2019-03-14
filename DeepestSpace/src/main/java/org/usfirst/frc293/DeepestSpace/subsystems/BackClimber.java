@@ -52,6 +52,7 @@ public class BackClimber extends Subsystem {
     // Back Climber Setpoint (inches)
     public double hab3set = 19;
     public double hab2set = 6;
+    public double retract_set = 0;
 
     // encoder count
     final double ENCODER_COUNT = 4096; //comes from 1024 count encoder with 4x configuration
@@ -67,6 +68,9 @@ public class BackClimber extends Subsystem {
     }
     public void hab2(){
         climberSetpoint(hab2set);
+    }
+    public void retractBackClimber(){
+        climberSetpoint(retract_set);
     }
 
 
