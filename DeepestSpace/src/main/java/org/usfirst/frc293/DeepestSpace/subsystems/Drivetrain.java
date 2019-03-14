@@ -86,11 +86,21 @@ public class Drivetrain extends Subsystem {
     ADIS16448_IMU imu;
     double visionCons = 0.1;
 
-    double[] runningAvgArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    int intBuffer = 10;
-    int runningCount = 0;
-    double runningAvgY = 0.0;
-    double avgCount = -0.0;
+    double kYaw = 0.3;
+    double avgYaw = 0.0;
+    double oldYawData = 0.0;
+    double newYawData = 0.0;
+    
+    double kRobotAng = 0.3;
+    double avgRobotAngle = 0.0;
+    double oldRobotAngle = 0.0;
+    double newRobotAngle = 0.0;
+
+    double kTargetAng = 0.3;
+    double avgTargetAngle = 0.0;
+    double oldTargetAngle = 0.0;
+    double newTargetAngle = 0.0;
+
 
     double kTurn;
     
@@ -186,15 +196,29 @@ public class Drivetrain extends Subsystem {
         SmartDashboard.putNumber("angle displacement of robot to target",targetInfo[4]);
         SmartDashboard.putNumber("angle displacement of target to robot", targetInfo[5]);
 
-        //Running Average for Y rate
-        runningCount = runningCount%intBuffer;
-        runningAvgArray[runningCount] = -imu.getRateY();
-        runningCount++;
-        avgCount = 0;
-        for(int i = 0; i <= intBuffer; i++){
-            avgCount += runningAvgArray[i];
+
+        newYawData = -imu.getRateY();
+        avgYaw = smoothingFilter(oldYawData, newYawData, kYaw);
+        oldYawData = newYawData;
+        double[] tempYArray = {avgYaw,newYawData};
+        SmartDashboard.putNumberArray("Yaw of Robot Array", tempYArray);
+
+        if(targetInfo[1] != 0.0){
+            
+            newRobotAngle = targetInfo[4];
+            avgRobotAngle = smoothingFilter(oldRobotAngle, newRobotAngle, kRobotAng);
+            double[] tempRArray = {avgRobotAngle,newRobotAngle};
+            oldRobotAngle = newRobotAngle;
+            SmartDashboard.putNumberArray("Angle of Robot Array", tempRArray);
+    
+            
+            newTargetAngle = targetInfo[5];
+            avgTargetAngle = smoothingFilter(oldTargetAngle, newTargetAngle, kTargetAng);
+            double[] tempTArray = {avgTargetAngle,newTargetAngle};
+            oldTargetAngle = newTargetAngle;
+            SmartDashboard.putNumberArray("Angle of Target Array", tempTArray);
         }
-        runningAvgY = avgCount/( ((double)intBuffer) + 1.0);
+        
  
         kTurn = 0.01 * 0.5 * (leftEncoder.getVelocity() + rightEncoder.getVelocity());
 
@@ -273,6 +297,13 @@ public class Drivetrain extends Subsystem {
 
     public double visionForm(double angleOfRobot,double angleOfTarget){
         return (visionCons * (angleOfRobot+angleOfTarget));
+    }
+
+    
+
+
+    public double smoothingFilter(double oldData, double newData, double constant){
+        return (((1-constant)* newData)+(constant*oldData));
     }
 
     // LED Logic
