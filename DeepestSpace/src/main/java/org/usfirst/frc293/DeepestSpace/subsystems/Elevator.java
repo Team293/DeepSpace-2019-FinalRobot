@@ -143,18 +143,19 @@ public class Elevator extends Subsystem {
     public void periodic() {
         // Put code here to be run every loop
         //Stuff for smartDashboard will delete eventually
-        SmartDashboard.putNumber("Lower Screw Position",lowerScrewTalon.getSensorCollection().getQuadraturePosition()/4096*(0.727272));
+
+        /*SmartDashboard.putNumber("Lower Screw Position",lowerScrewTalon.getSensorCollection().getQuadraturePosition()/4096*(0.727272));
         SmartDashboard.putBoolean("Lower Screw Low Switch",!lowerScrewTalon.getSensorCollection().isRevLimitSwitchClosed());
         SmartDashboard.putNumber("Lower Raw Data", lowerScrewTalon.getSensorCollection().getQuadraturePosition());
         SmartDashboard.putNumber("Lower Test Inches",getLowInch());
-        SmartDashboard.putBoolean("At position to stow",atPosition(stowSet));
+        SmartDashboard.putBoolean("At position to stow",atPosition(stowSet))*/;
         
         if(lowerScrewTalon.getSensorCollection().isRevLimitSwitchClosed()){
             lowerScrewTalon.setSelectedSensorPosition(0);
         }
-        if(lowerScrewTalon.getSensorCollection().isFwdLimitSwitchClosed()){
+        /*if(lowerScrewTalon.getSensorCollection().isFwdLimitSwitchClosed()){
             lowerScrewTalon.setSelectedSensorPosition(73216); //TODO check value
-        }
+        }*/
 
     }
 
@@ -220,7 +221,6 @@ public class Elevator extends Subsystem {
         else if(setpoints[1] == 1){
 
             elevatorUp();
-
         }
         
     }

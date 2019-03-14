@@ -1550,7 +1550,7 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: &id035 [List]
+        validators: &id029 [List]
         value:
         - &id026 !!robotbuilder.data.CommandGroupEntry
           command:
@@ -1931,12 +1931,15 @@ Children:
       Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Run When Disabled, validators: null, value: false}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id029 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id029
+        value: []
       Commands: !!robotbuilder.data.properties.ListProperty
-        default: &id036
+        default: []
+        name: Commands
+        validators: *id029
+        value:
         - &id034 !!robotbuilder.data.CommandGroupEntry
           command:
             base: &id032
@@ -1986,9 +1989,6 @@ Children:
             validators: null
             value: []
           previous: *id034
-        name: Commands
-        validators: *id035
-        value: *id036
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group

@@ -102,7 +102,9 @@ public class Drivetrain extends Subsystem {
     double newTargetAngle = 0.0;
 
 
-    double kTurn;
+    double kTurn;    // LED Logic
+    private boolean solutionFound = false;
+    private boolean autopilotEnable = false;
     
     public Drivetrain() {
 
@@ -186,24 +188,24 @@ public class Drivetrain extends Subsystem {
             speed = 1.0;
         }
 
-        SmartDashboard.putNumber("Left Encoder RPM", leftEncoder.getVelocity());
-        SmartDashboard.putNumber("Right Encoder RPM", rightEncoder.getVelocity());
+        /*SmartDashboard.putNumber("Left Encoder RPM", leftEncoder.getVelocity());
+        SmartDashboard.putNumber("Right Encoder RPM", rightEncoder.getVelocity());*/
         
         double[] tempArray = {0,0,0,0,0,0};
         double[] targetInfo = SmartDashboard.getNumberArray("vision/target_info",tempArray);
 
-        SmartDashboard.putNumber("Inches to Target", targetInfo[3]);
+        /*SmartDashboard.putNumber("Inches to Target", targetInfo[3]);
         SmartDashboard.putNumber("angle displacement of robot to target",targetInfo[4]);
-        SmartDashboard.putNumber("angle displacement of target to robot", targetInfo[5]);
+        SmartDashboard.putNumber("angle displacement of target to robot", targetInfo[5]);*/
 
 
         newYawData = -imu.getRateY();
         avgYaw = smoothingFilter(oldYawData, newYawData, kYaw);
         oldYawData = newYawData;
         double[] tempYArray = {avgYaw,newYawData};
-        SmartDashboard.putNumberArray("Yaw of Robot Array", tempYArray);
 
-        if(targetInfo[1] != 0.0){
+
+        /*if(targetInfo[1] != 0.0){
             
             newRobotAngle = targetInfo[4];
             avgRobotAngle = smoothingFilter(oldRobotAngle, newRobotAngle, kRobotAng);
@@ -217,7 +219,7 @@ public class Drivetrain extends Subsystem {
             double[] tempTArray = {avgTargetAngle,newTargetAngle};
             oldTargetAngle = newTargetAngle;
             SmartDashboard.putNumberArray("Angle of Target Array", tempTArray);
-        }
+        }*/
         
  
         kTurn = 0.01 * 0.5 * (leftEncoder.getVelocity() + rightEncoder.getVelocity());
@@ -306,7 +308,5 @@ public class Drivetrain extends Subsystem {
         return (((1-constant)* newData)+(constant*oldData));
     }
 
-    // LED Logic
-    private boolean solutionFound = false;
-    private boolean autopilotEnable = false;
+
 }
