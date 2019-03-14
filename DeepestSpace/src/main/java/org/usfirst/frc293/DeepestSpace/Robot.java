@@ -60,6 +60,7 @@ public class Robot extends TimedRobot {
         frontClimber = new FrontClimber();
         backClimber = new BackClimber();
         climberDriver = new ClimberDriver();
+        SmartDashboard.putData(climberDriver);
         arm = new Arm();
         SmartDashboard.putData(arm);
         buttonLights = new ButtonLights();
