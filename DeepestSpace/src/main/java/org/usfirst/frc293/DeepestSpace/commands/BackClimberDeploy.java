@@ -61,6 +61,5 @@ public class BackClimberDeploy extends Command {
     @Override
     protected void interrupted() {
         Robot.backClimber.backClimberStop();
-        Robot.frontClimber.frontClimberDeploy();
     }
 }
