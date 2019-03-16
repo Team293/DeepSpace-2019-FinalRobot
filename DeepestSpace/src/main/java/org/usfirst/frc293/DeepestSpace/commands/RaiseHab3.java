@@ -49,16 +49,21 @@ public class RaiseHab3 extends Command {
         // Robot.backClimber.hab3();
 
       //velocity logic
-      if  ((Robot.backClimber.getBackClimberEncValue() >= Robot.backClimber.hab3set) && (Robot.frontClimber.getFrontClimberEncValue() >= Robot.frontClimber.hab3set)){
+      if  ((Robot.backClimber.getBackClimberEncValue() >= Robot.backClimber.hab3enc)){
           Robot.backClimber.holdVelocity();
-          Robot.frontClimber.holdVelocity();
-      }
+         }
       else {
           Robot.backClimber.habVelocity();
-          Robot.frontClimber.habVelocity();
+         }
+
+      if (Robot.frontClimber.getFrontClimberEncValue() >= Robot.frontClimber.hab3enc){
+         Robot.frontClimber.holdVelocity();
+        }
+      else {
+         Robot.frontClimber.habVelocity();
+        }
       }
         
-    }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override

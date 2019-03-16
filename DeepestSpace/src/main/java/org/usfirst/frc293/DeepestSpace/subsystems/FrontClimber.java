@@ -45,7 +45,7 @@ public class FrontClimber extends Subsystem {
     // Front Climber PID Parameters
     // must be tuned
     private double kF = 0;
-    private double kP = 0.1;
+    private double kP = 1.;
     private double kI = 0;
     private double kD = 0;
 
@@ -56,6 +56,11 @@ public class FrontClimber extends Subsystem {
         
 
     final int ENCODER_COUNT = 4096;
+
+    // converting inches to encoder counts
+    public int hab3enc = 13045; //(20 * (ENCODER_COUNT/(2*3.14)));
+    public int hab2enc = 4566; //(7 * (ENCODER_COUNT/(2*3.14)));
+    
 
     // math for converting raw encoder values to inches
     public void climberSetpoint(double setpoints){
@@ -146,6 +151,10 @@ public class FrontClimber extends Subsystem {
     }
     public void frontClimberStop(){
         frontClimberTalon.set(0);
+    }
+
+    public void backClimberPower(double power){
+        frontClimberTalon.set(power);
     }
 
     public int getFrontClimberEncValue(){

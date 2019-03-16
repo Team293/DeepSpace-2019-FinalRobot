@@ -52,17 +52,19 @@ public class RaiseHab2 extends Command {
         // Robot.backClimber.hab2();
 
         //velocity logic
-        if  ((Robot.backClimber.getBackClimberEncValue() >= Robot.backClimber.hab2set) 
-        && (Robot.frontClimber.getFrontClimberEncValue() >= Robot.frontClimber.hab2set)){
+        if  ((Robot.backClimber.getBackClimberEncValue() >= Robot.backClimber.hab2enc)){
             Robot.backClimber.holdVelocity();
-            Robot.frontClimber.holdVelocity();
-        }
+           }
         else {
             Robot.backClimber.habVelocity();
-            Robot.frontClimber.habVelocity();
-        }
-
-
+           }
+  
+        if (Robot.frontClimber.getFrontClimberEncValue() >= Robot.frontClimber.hab2enc){
+           Robot.frontClimber.holdVelocity();
+          }
+        else {
+           Robot.frontClimber.habVelocity();
+          }
     }
 
     // Make this return true when this Command no longer needs to run execute()
