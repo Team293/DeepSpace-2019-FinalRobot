@@ -45,7 +45,7 @@ public class FrontClimber extends Subsystem {
     // Front Climber PID Parameters
     // must be tuned
     private double kF = 0;
-    private double kP = .01;
+    private double kP = 0.1;
     private double kI = 0;
     private double kD = 0;
 
