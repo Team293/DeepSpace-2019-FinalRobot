@@ -60,7 +60,7 @@ public class Climber extends Subsystem {
     private double frontSetpoint = 0;
     private double manualSpeed = 60; //Raw Sensor Units
 
-    // For Future Reference
+    // For Future   Reference
     private double hab2Height = 6; //In inches
     private double hab3Height  = 19;
 
