@@ -42,7 +42,7 @@ public class ClimberForward extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.climberDriver.climberDriverForward();
+        Robot.climber.landingForward();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -60,6 +60,6 @@ public class ClimberForward extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-        Robot.climberDriver.climberDriverStop();
+        Robot.climber.landingStop();
     }
 }

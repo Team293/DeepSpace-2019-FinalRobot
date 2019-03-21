@@ -38,9 +38,7 @@ public class Robot extends TimedRobot {
     public static Drivetrain drivetrain;
     public static Gripper gripper;
     public static Elevator elevator;
-    public static FrontClimber frontClimber;
-    public static ClimberDriver climberDriver;
-    public static BackClimber backClimber;
+    public static Climber climber;
     public static Arm arm;
     public static ButtonLights buttonLights;
 
@@ -57,10 +55,8 @@ public class Robot extends TimedRobot {
         drivetrain = new Drivetrain();
         gripper = new Gripper();
         elevator = new Elevator();
-        frontClimber = new FrontClimber();
-        climberDriver = new ClimberDriver();
-        SmartDashboard.putData(climberDriver);
-        backClimber = new BackClimber();
+        climber = new Climber();
+
         arm = new Arm();
         SmartDashboard.putData(arm);
         buttonLights = new ButtonLights();
@@ -87,7 +83,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void disabledInit(){
-
+        
     }
 
     @Override

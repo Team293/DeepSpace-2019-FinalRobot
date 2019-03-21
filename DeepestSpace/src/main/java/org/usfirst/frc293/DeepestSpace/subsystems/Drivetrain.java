@@ -78,7 +78,7 @@ public class Drivetrain extends Subsystem {
     //Smart Stuff that is Smart
     //Units are in RPM (Theoretically)
     //I don't trust the documentation though
-    double maxVel = 5700;
+    double maxVel = 3000;
     double minVel = 0;
     double maxAcc = 2000;
     int smartMotionSlot = 0;
@@ -105,6 +105,7 @@ public class Drivetrain extends Subsystem {
     //double kTurn;    // LED Logic
     private boolean solutionFound = false;
     private boolean autopilotEnable = false;
+    private boolean badIdea = false;
     
     public Drivetrain() {
 
@@ -179,14 +180,23 @@ public class Drivetrain extends Subsystem {
     }
 
     @Override
-    public void periodic() {
+    public void periodic() {    
         // Put code here to be run every loop
         if(Robot.oi.getLeftJoy().getTrigger()||Robot.oi.getRightJoy().getTrigger()){
-            speed = 0.5;
+            speed = 0.25;
         }
         else{
             speed = 1.0;
         }
+
+        if(Robot.oi.getOpRightJoy().getRawButton(9)){
+            badIdea = true;
+        }
+        else{
+            badIdea = false;
+        }
+
+
 
         /*SmartDashboard.putNumber("Left Encoder RPM", leftEncoder.getVelocity());
         SmartDashboard.putNumber("Right Encoder RPM", rightEncoder.getVelocity());*/
@@ -252,27 +262,39 @@ public class Drivetrain extends Subsystem {
             //rightSetpoint += kTurn;
         }
         
+        if(badIdea){
+            leftSetpoint = -maxRpm;
+            rightSetpoint = -maxRpm;
+        }
+
+
         leftPID.setReference(leftSetpoint, ControlType.kVelocity);
         rightPID.setReference(rightSetpoint, ControlType.kVelocity);
     }
-    /*public void smartDrive(Joystick left, Joystick right){
+    public void smartDrive(Joystick left, Joystick right){
         double leftSetpoint = 0;
         double rightSetpoint = 0;
         double leftPos = left.getY();
         double rightPos = right.getY();
-        if(Math.abs(leftPos) >= 0.13){
-            leftSetpoint = leftPos * maxRpm * speed;
-            leftSetpoint -= kTurn;
+        if(Math.abs(leftPos) >= 0.15){
+            leftSetpoint = leftPos * maxRpm * speed * 0.5;
+            if(speed >= 1.0){
+                leftPID.setReference(leftSetpoint, ControlType.kSmartVelocity);
+            }
+            else{
+                leftPID.setReference(leftSetpoint, ControlType.kVelocity);
+            }
         }
-        if(Math.abs(rightPos) >= 0.1){
-            rightSetpoint = rightPos * maxRpm * speed;
-            rightSetpoint += kTurn;
+        if(Math.abs(rightPos) >= 0.15){
+            rightSetpoint = rightPos * maxRpm * speed  * 0.5;
+            if(speed >= 1.0){
+                rightPID.setReference(rightSetpoint, ControlType.kSmartVelocity);
+            }
+            else{
+                rightPID.setReference(rightSetpoint, ControlType.kVelocity);
+            }
         }
-        
-        
-        leftPID.setReference(leftSetpoint, ControlType.kSmartVelocity);
-        rightPID.setReference(rightSetpoint, ControlType.kSmartVelocity);
-    }*/
+    }
     
     public void distance(double rotations){
         leftPID.setReference(rotations, ControlType.kPosition);

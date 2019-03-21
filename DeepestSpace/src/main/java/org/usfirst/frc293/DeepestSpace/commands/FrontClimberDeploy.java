@@ -42,7 +42,7 @@ public class FrontClimberDeploy extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.frontClimber.frontClimberDeploy();
+        Robot.climber.frontClimberUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -60,6 +60,6 @@ public class FrontClimberDeploy extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-        Robot.frontClimber.frontClimberStop();
+        
     }
 }
