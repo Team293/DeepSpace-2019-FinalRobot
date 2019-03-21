@@ -122,11 +122,11 @@ public class Arm extends PIDSubsystem {
 
     // Use this function and not the setSetpoint function
     public void setAngle(double angle){
-        double rawAngle = (angle * 4.94) + 380.0;
+        double rawAngle = (angle * 4.94) + 323.0;
         setSetpoint(rawAngle);
     }
     public int getAngleRawUnits(int angle){
-        int rawAngle = (angle * 5) + 380;
+        int rawAngle = (angle * 5) + 340;
         return rawAngle;
     }
 

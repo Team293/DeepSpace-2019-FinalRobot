@@ -44,7 +44,9 @@ public class DriveWJoystick extends Command {
     @Override
     protected void execute() {
         //Robot.drivetrain.full();
+        //Robot.drivetrain.dumbJoy(Robot.oi.getLeftJoy(), Robot.oi.getRightJoy());
         Robot.drivetrain.velocityDrive(Robot.oi.getLeftJoy(), Robot.oi.getRightJoy());
+        //Robot.drivetrain.smartDrive(Robot.oi.getLeftJoy(), Robot.oi.getRightJoy());
     }
 
 
