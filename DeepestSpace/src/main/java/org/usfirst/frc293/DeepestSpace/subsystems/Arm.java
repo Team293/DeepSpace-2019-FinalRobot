@@ -11,11 +11,9 @@
 
 package org.usfirst.frc293.DeepestSpace.subsystems;
 
-import org.usfirst.frc293.DeepestSpace.commands.*;
+
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDOutput;
+
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;

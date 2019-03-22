@@ -69,9 +69,7 @@ public class Elevator extends Subsystem {
     private double kD = 0.001;
 
     // Things for SmartMotion Stuff
-    //TODO Get numbers
     private double maxRPM = 5000;
-    //TODO Test these variables so they don't break the robot
     private int maxAcc = 4096;
     private int maxVel = 4096*2;
     
