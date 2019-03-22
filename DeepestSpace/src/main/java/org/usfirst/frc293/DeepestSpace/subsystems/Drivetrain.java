@@ -328,32 +328,28 @@ public class Drivetrain extends Subsystem {
     double Rdeadband = .15;
     double left_joy = Robot.oi.leftJoy.getY();
     double right_joy = Robot.oi.rightJoy.getY();
-    double outY = 0;
+    double outLeftY = 0.;
+    double outRightY = 0.;
     public void deadbandLogic(){
         if (left_joy > Ldeadband){
-            leftMotor1.set(left_joy - Ldeadband);
-            leftMotor2.set((left_joy - Ldeadband));
+            outLeftY = (left_joy - Ldeadband);
         }
         else if (left_joy < -Ldeadband){
-            leftMotor1.set(left_joy - Ldeadband);
-            leftMotor2.set(left_joy - Ldeadband);
+            outLeftY = (left_joy - Ldeadband);
         }
         else {
-            leftMotor1.set(0);
-            leftMotor2.set(0);
+            outLeftY = 0;
         }
         if (right_joy > Rdeadband){
-            rightMotor1.set(right_joy - Rdeadband);
-            rightMotor2.set(right_joy - Rdeadband);
+            outRightY = (right_joy - Rdeadband);
         }
         else if (right_joy < -Rdeadband){
-            rightMotor1.set(right_joy - Rdeadband);
-            rightMotor2.set(right_joy - Rdeadband);
+            outRightY = (right_joy - Rdeadband);
         }
         else {
-            rightMotor1.set(0);
-            rightMotor2.set(0);
+            outRightY = 0;
         }
+
     }
 
 }
