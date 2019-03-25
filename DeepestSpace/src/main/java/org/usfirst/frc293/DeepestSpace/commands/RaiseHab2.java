@@ -41,6 +41,7 @@ public class RaiseHab2 extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        
         Robot.climber.setFrontPosInches(7);
         Robot.climber.setBackPosInches(7);
     }

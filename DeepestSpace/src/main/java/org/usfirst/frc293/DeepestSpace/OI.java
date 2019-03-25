@@ -67,6 +67,7 @@ public class OI {
     public JoystickButton frontClimberRetractB;
     public JoystickButton backClimberDeployB;
     public JoystickButton backClimberRetractB;
+    public JoystickButton homeDownB;
     public Joystick opLeftJoy;
     public JoystickButton shootB;
     public JoystickButton openGripB;
@@ -74,7 +75,6 @@ public class OI {
     public JoystickButton armDownButton;
     public JoystickButton armUpButton;
     public JoystickButton pusherOutB;
-    public JoystickButton homeDownB;
     public JoystickButton moveBottomDownB;
     public JoystickButton moveBottomUpB;
     public JoystickButton raiseHab2B;
@@ -129,8 +129,6 @@ public class OI {
         moveBottomUpB.whileHeld(new MoveBottomUp());
         moveBottomDownB = new JoystickButton(opRightJoy, 11);
         moveBottomDownB.whileHeld(new MoveBottomDown());
-        homeDownB = new JoystickButton(opRightJoy, 7);
-        homeDownB.whenPressed(new HomeElevDown());
         pusherOutB = new JoystickButton(opRightJoy, 2);
         pusherOutB.whileHeld(new PusherOut());
         armUpButton = new JoystickButton(opRightJoy, 6);
@@ -145,6 +143,8 @@ public class OI {
         shootB.whenPressed(new Shoot());
         opLeftJoy = new Joystick(3);
         
+        homeDownB = new JoystickButton(opLeftJoy, 7);
+        homeDownB.whenPressed(new HomeElevDown());
         backClimberRetractB = new JoystickButton(opLeftJoy, 4);
         backClimberRetractB.whileHeld(new BackClimberRetract());
         backClimberDeployB = new JoystickButton(opLeftJoy, 6);

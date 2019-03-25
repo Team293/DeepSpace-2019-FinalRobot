@@ -28,6 +28,7 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.ControlType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -90,9 +91,11 @@ public class Drivetrain extends Subsystem {
     double oldTargetAngle = 0.0;
     double newTargetAngle = 0.0;
 
-
+    double Ldeadband = .15;
+    double Rdeadband = .15;
+    
     //double kTurn;    // LED Logic
-    double deadband = 0.15;
+
 
     private boolean badIdea = false;
     
@@ -172,39 +175,39 @@ public class Drivetrain extends Subsystem {
     public void periodic() {    
         // Put code here to be run every loop
         if(Robot.oi.getLeftJoy().getTrigger()||Robot.oi.getRightJoy().getTrigger()){
-            speed = 0.25;
+            speed = 0.125;
         }
         else{
-            speed = 1.0;
+            speed = .5;
         }
 
-        if(Robot.oi.getOpLeftJoy().getRawButton(7)){
+        /*if(Robot.oi.getOpLeftJoy().getRawButton(7)){
             badIdea = true;
         }
         else{
             badIdea = false;
-        }
+        }*/
 
 
 
         /*SmartDashboard.putNumber("Left Encoder RPM", leftEncoder.getVelocity());
         SmartDashboard.putNumber("Right Encoder RPM", rightEncoder.getVelocity());*/
         
-        //double[] tempArray = {0,0,0,0,0,0};
-        //double[] targetInfo = SmartDashboard.getNumberArray("vision/target_info",tempArray);
+        double[] tempArray = {0,0,0,0,0,0};
+        double[] targetInfo = SmartDashboard.getNumberArray("vision/target_info",tempArray);
 
         /*SmartDashboard.putNumber("Inches to Target", targetInfo[3]);
         SmartDashboard.putNumber("angle displacement of robot to target",targetInfo[4]);
         SmartDashboard.putNumber("angle displacement of target to robot", targetInfo[5]);*/
 
 
-        /*newYawData = -imu.getRateY();
-        avgYaw = smoothingFilter(oldYawData, newYawData, kYaw);
-        oldYawData = newYawData;
-        double[] tempYArray = {avgYaw,newYawData};*/
+        //newYawData = -imu.getRateY();
+        //avgYaw = smoothingFilter(oldYawData, newYawData, kYaw);
+        //oldYawData = newYawData;
+        //double[] tempYArray = {avgYaw,newYawData};
 
 
-        /*if(targetInfo[1] != 0.0){
+        if(targetInfo[1] != 0.0){
             
             newRobotAngle = targetInfo[4];
             avgRobotAngle = smoothingFilter(oldRobotAngle, newRobotAngle, kRobotAng);
@@ -218,7 +221,7 @@ public class Drivetrain extends Subsystem {
             double[] tempTArray = {avgTargetAngle,newTargetAngle};
             oldTargetAngle = newTargetAngle;
             SmartDashboard.putNumberArray("Angle of Target Array", tempTArray);
-        }*/
+        }
         
  
         //kTurn = 0.01 * 0.5 * (leftEncoder.getVelocity() + rightEncoder.getVelocity());
@@ -233,9 +236,7 @@ public class Drivetrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-    // setting deadband values for each joystick
-    double Ldeadband = .15;
-    double Rdeadband = .15;
+
 
     public void velocityDrive(Joystick left, Joystick right){
         double leftSetpoint = 0;
@@ -247,18 +248,18 @@ public class Drivetrain extends Subsystem {
         //rightSetpoint = rightPos * maxRpm * speed * 0.5;
         //leftSetpoint = leftPos * maxRpm * speed * 0.5;
         if(Math.abs(leftPos) >= Ldeadband){
-            leftSetpoint = ((leftPos - Ldeadband) * maxRpm * speed * 0.5);
+            leftSetpoint = ((leftPos - Ldeadband) * maxRpm * speed);
             //leftSetpoint -= kTurn;
         }
         if(Math.abs(rightPos) >= Rdeadband){
-            rightSetpoint = ((rightPos - Rdeadband) * maxRpm * speed * 0.5);
+            rightSetpoint = ((rightPos - Rdeadband) * maxRpm * speed);
             //rightSetpoint += kTurn;
         }
         
-        if(badIdea){
+        /*if(badIdea){
             leftSetpoint = -maxRpm;
             rightSetpoint = -maxRpm;
-        }
+        }*/
 
 
         leftPID.setReference(leftSetpoint, ControlType.kVelocity);
@@ -327,33 +328,6 @@ public class Drivetrain extends Subsystem {
         return (((1-constant)* newData)+(constant*oldData));
     }
 
-    //Deprecated
 
-    // putting this here for now just to work it out and then I'll put it in the right places
-    double left_joy = Robot.oi.leftJoy.getY();
-    double right_joy = Robot.oi.rightJoy.getY();
-    double outLeftY = 0.;
-    double outRightY = 0.;
-    public void deadbandLogic(){
-        if (left_joy > Ldeadband){
-            outLeftY = (left_joy - Ldeadband);
-        }
-        else if (left_joy < -Ldeadband){
-            outLeftY = (left_joy - Ldeadband);
-        }
-        else {
-            outLeftY = 0;
-        }
-        if (right_joy > Rdeadband){
-            outRightY = (right_joy - Rdeadband);
-        }
-        else if (right_joy < -Rdeadband){
-            outRightY = (right_joy - Rdeadband);
-        }
-        else {
-            outRightY = 0;
-        }
-
-    }
 
 }
