@@ -92,6 +92,7 @@ public class Drivetrain extends Subsystem {
 
 
     //double kTurn;    // LED Logic
+    double deadband = 0.15;
 
     private boolean badIdea = false;
     
@@ -177,7 +178,7 @@ public class Drivetrain extends Subsystem {
             speed = 1.0;
         }
 
-        if(Robot.oi.getOpRightJoy().getRawButton(9)){
+        if(Robot.oi.getOpLeftJoy().getRawButton(7)){
             badIdea = true;
         }
         else{
@@ -232,6 +233,10 @@ public class Drivetrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
+    // setting deadband values for each joystick
+    double Ldeadband = .15;
+    double Rdeadband = .15;
+
     public void velocityDrive(Joystick left, Joystick right){
         double leftSetpoint = 0;
         double rightSetpoint = 0;
@@ -241,12 +246,12 @@ public class Drivetrain extends Subsystem {
         leftSetpoint  = 0.;
         //rightSetpoint = rightPos * maxRpm * speed * 0.5;
         //leftSetpoint = leftPos * maxRpm * speed * 0.5;
-        if(Math.abs(leftPos) >= 0.15){
-            leftSetpoint = leftPos * maxRpm * speed * 0.5;
+        if(Math.abs(leftPos) >= Ldeadband){
+            leftSetpoint = ((leftPos - Ldeadband) * maxRpm * speed * 0.5);
             //leftSetpoint -= kTurn;
         }
-        if(Math.abs(rightPos) >= 0.15){
-            rightSetpoint = rightPos * maxRpm * speed * 0.5;
+        if(Math.abs(rightPos) >= Rdeadband){
+            rightSetpoint = ((rightPos - Rdeadband) * maxRpm * speed * 0.5);
             //rightSetpoint += kTurn;
         }
         
@@ -264,8 +269,8 @@ public class Drivetrain extends Subsystem {
         double rightSetpoint = 0;
         double leftPos = left.getY();
         double rightPos = right.getY();
-        if(Math.abs(leftPos) >= 0.15){
-            leftSetpoint = leftPos * maxRpm * speed * 0.5;
+        if(Math.abs(leftPos) >= Ldeadband){
+            leftSetpoint = (leftPos - Ldeadband) * maxRpm * speed * 0.5;
             if(speed >= 1.0){
                 leftPID.setReference(leftSetpoint, ControlType.kSmartVelocity);
             }
@@ -273,8 +278,8 @@ public class Drivetrain extends Subsystem {
                 leftPID.setReference(leftSetpoint, ControlType.kVelocity);
             }
         }
-        if(Math.abs(rightPos) >= 0.15){
-            rightSetpoint = rightPos * maxRpm * speed  * 0.5;
+        if(Math.abs(rightPos) >= Rdeadband){
+            rightSetpoint = (rightPos - Rdeadband) * maxRpm * speed  * 0.5;
             if(speed >= 1.0){
                 rightPID.setReference(rightSetpoint, ControlType.kSmartVelocity);
             }
@@ -322,10 +327,9 @@ public class Drivetrain extends Subsystem {
         return (((1-constant)* newData)+(constant*oldData));
     }
 
+    //Deprecated
 
     // putting this here for now just to work it out and then I'll put it in the right places
-    double Ldeadband = .15;
-    double Rdeadband = .15;
     double left_joy = Robot.oi.leftJoy.getY();
     double right_joy = Robot.oi.rightJoy.getY();
     double outLeftY = 0.;
