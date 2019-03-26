@@ -47,11 +47,15 @@ public class RaiseHab2 extends Command {
     protected void initialize() {
         targetPosRaw = Robot.climber.inchesToRaw(targetPos);
         tolerRaw = Robot.climber.inchesToRaw(toler);
+        Robot.climber.climbTarget = 7.0;
+        Robot.climber.setFrontPosInches(7);
+        Robot.climber.setBackPosInches(7);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+        /*
         if ((targetPosRaw + tolerRaw) < Robot.climber.getBackClimbEnc()){
             Robot.climber.pidBackDown();
         }
@@ -64,7 +68,7 @@ public class RaiseHab2 extends Command {
         }
         else if ((targetPosRaw - tolerRaw) > Robot.climber.getFrontClimbEnc()){
             Robot.climber.pidFrontUp();
-        }
+        }*/
         
     }
 

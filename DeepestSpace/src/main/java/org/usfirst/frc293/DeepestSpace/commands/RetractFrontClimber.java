@@ -39,6 +39,7 @@ public class RetractFrontClimber extends Command {
     @Override
     protected void initialize() {
         Robot.climber.setFrontPosInches(0);
+        Robot.climber.climbTarget = 0.;
     }
 
     // Called repeatedly when this Command is scheduled to run

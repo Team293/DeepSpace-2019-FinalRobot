@@ -45,6 +45,7 @@ public class RaiseHab3 extends Command {
     protected void initialize() {
         targetPosRaw = Robot.climber.inchesToRaw(targetPos);
         tolerRaw = Robot.climber.inchesToRaw(toler);
+        Robot.climber.climbTarget = 20.0;
     }
 
     // Called repeatedly when this Command is scheduled to run
