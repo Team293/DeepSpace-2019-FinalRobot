@@ -36,9 +36,11 @@ public class RaiseHab3 extends Command {
     }
 
     double targetPos = 20.0;
-    double targetPosRaw;
+    int targetPosRaw;
     double toler = 0.25;
-    double tolerRaw;
+    int tolerRaw;
+    int backClimbEnc;
+    int frontClimbEnc;
 
     // Called just before this Command runs the first time
     @Override
@@ -46,22 +48,26 @@ public class RaiseHab3 extends Command {
         targetPosRaw = Robot.climber.inchesToRaw(targetPos);
         tolerRaw = Robot.climber.inchesToRaw(toler);
         Robot.climber.climbTarget = 20.0;
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        if ((targetPosRaw + tolerRaw) < Robot.climber.getBackClimbEnc()){
+        backClimbEnc = Robot.climber.getBackClimbEnc();
+        frontClimbEnc = Robot.climber.getFrontClimbEnc();
+    
+        if ((targetPosRaw + tolerRaw) < backClimbEnc){
             Robot.climber.pidBackDown();
         }
-        else if ((targetPosRaw - tolerRaw) > Robot.climber.getBackClimbEnc()){
+        else if ((targetPosRaw - tolerRaw) > backClimbEnc){
             Robot.climber.pidBackUp();
         }
         
-        if((targetPosRaw + tolerRaw) < Robot.climber.getFrontClimbEnc()){
+        if((targetPosRaw + tolerRaw) < frontClimbEnc){
             Robot.climber.pidFrontDown();
         }
-        else if ((targetPosRaw - tolerRaw) > Robot.climber.getFrontClimbEnc()){
+        else if ((targetPosRaw - tolerRaw) > frontClimbEnc){
             Robot.climber.pidFrontUp();
         }
         
