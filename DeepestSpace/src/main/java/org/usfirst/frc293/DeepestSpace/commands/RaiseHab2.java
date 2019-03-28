@@ -58,7 +58,7 @@ public class RaiseHab2 extends Command {
     protected void execute() {
         backClimbEnc = Robot.climber.getBackClimbEnc();
         frontClimbEnc = Robot.climber.getFrontClimbEnc();
-    
+    /*
         if ((targetPosRaw + tolerRaw) < backClimbEnc){
             Robot.climber.pidBackDown();
         }
@@ -72,7 +72,16 @@ public class RaiseHab2 extends Command {
         else if ((targetPosRaw - tolerRaw) > frontClimbEnc){
             Robot.climber.pidFrontUp();
         }
-        
+      */  
+      // All the above up and down is now just allowing for adding to the
+      // encoder command until the back encoder is equal or greater than the
+      // commanded position.
+      if (targetPosRaw > backClimbEnc) {
+        Robot.climber.pidBackUp();
+      }
+      if (targetPosRaw > frontClimbEnc){
+        Robot.climber.pidFrontUp();
+      }
     }
 
     // Make this return true when this Command no longer needs to run execute()
