@@ -54,7 +54,6 @@ public class Climber extends Subsystem {
     private double fkP = 4.0;
     private double fkI = -0;
     private double fkD = -0;
-
     private double bkP = 4.0;
     private double bkI = -0;
     private double bkD = -0;
@@ -69,6 +68,8 @@ public class Climber extends Subsystem {
     // For Future   Reference
     private double hab2Height = 9; //In inches
     private double hab3Height  = 20;
+    private double topLimit = 0.;
+    private double bottomLimit = 0.;
 
     private double heightLimit = 100; // Inches ("to the moon, Alice!")
 
@@ -128,6 +129,7 @@ public class Climber extends Subsystem {
         backClimber.config_kD(0, bkD);
         backClimber.setSelectedSensorPosition(0);
         backClimber.setNeutralMode(NeutralMode.Brake);
+
         // THis may be our issue with limiting positions!  Maybe ...
         //backClimber.configForwardSoftLimitEnable(true);
         //backClimber.configForwardSoftLimitThreshold(inchesToRaw(heightLimit));
@@ -163,6 +165,8 @@ public class Climber extends Subsystem {
     public void periodic() {
         // Put code here to be run every loop
 
+        // RMM added safety set on setpoint to avoid going past limits!
+        
         backClimber.set(ControlMode.Position,backSetpoint);
         frontClimber.set(ControlMode.Position,frontSetpoint);
 

@@ -81,7 +81,7 @@ public class Elevator extends Subsystem {
         lowHatchSet = {9.5,0}, //used to be (0,0,0)
         lowCargoSet = {4.5,0},
         midHatchSet = {15,1},
-        midCargoSet = {4,1},
+        midCargoSet = {15,1},
         cargoShipSet = {5,1},
         stowSet = {12.5,0};
     
