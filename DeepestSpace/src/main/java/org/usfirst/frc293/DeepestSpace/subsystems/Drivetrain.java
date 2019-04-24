@@ -169,7 +169,7 @@ public class Drivetrain extends Subsystem {
             badIdea = true;
         }
         else{
-            badIdea = false;
+            badIdea = false;d
         }*/
 
 
