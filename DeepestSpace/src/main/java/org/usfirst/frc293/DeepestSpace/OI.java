@@ -156,7 +156,8 @@ public class OI {
         moveElevLowCargo = new JoystickButton(opLeftJoy, 12);
         moveElevLowCargo.whenPressed(new MoveElevator("LowCargo"));
         moveElevMidCargo = new JoystickButton(opLeftJoy, 10);
-        moveElevMidCargo.whileHeld(new MoveElevator("MidCargo"));
+        moveElevMidCargo.whileHeld(new MoveElev
+        ator("MidCargo"));
         moveElevMidHatch = new JoystickButton(opLeftJoy, 9);
         moveElevMidHatch.whileHeld(new MoveElevator("MidHatch"));
         moveElevLowHatch = new JoystickButton(opLeftJoy, 11);
