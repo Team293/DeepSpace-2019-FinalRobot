@@ -64,11 +64,11 @@ public class OI {
     public JoystickButton moveElevMidCargo;
     public JoystickButton moveElevLowCargo;
     public JoystickButton frontClimberDeployB;
-    public JoystickButton frontClimberRetractB;
     public JoystickButton backClimberDeployB;
-    public JoystickButton backClimberRetractB;
     public JoystickButton homeDownB;
     public Joystick opLeftJoy;
+    public JoystickButton backClimberRetractB;
+    public JoystickButton frontClimberRetractB;
     public JoystickButton shootB;
     public JoystickButton openGripB;
     public JoystickButton gripCloseB;
@@ -117,13 +117,13 @@ public class OI {
         lowCargoB.whenPressed(new MoveElevator("LowCargo"));
         opRightJoy = new Joystick(2);
         
-        retractBackClimberB = new JoystickButton(opRightJoy, 8);
+        retractBackClimberB = new JoystickButton(opRightJoy, 7);
         retractBackClimberB.whenPressed(new RetractBackClimber());
         retractFrontClimberB = new JoystickButton(opRightJoy, 7);
         retractFrontClimberB.whenPressed(new RetractFrontClimber());
-        raiseHab3B = new JoystickButton(opRightJoy, 10);
+        raiseHab3B = new JoystickButton(opRightJoy, 8);
         raiseHab3B.whenPressed(new RaiseHab3());
-        raiseHab2B = new JoystickButton(opRightJoy, 9);
+        raiseHab2B = new JoystickButton(opRightJoy, 7);
         raiseHab2B.whenPressed(new RaiseHab2());
         moveBottomUpB = new JoystickButton(opRightJoy, 12);
         moveBottomUpB.whileHeld(new MoveBottomUp());
@@ -141,16 +141,16 @@ public class OI {
         openGripB.whenPressed(new GripOpen());
         shootB = new JoystickButton(opRightJoy, 1);
         shootB.whenPressed(new Shoot());
+        frontClimberRetractB = new JoystickButton(opRightJoy, 9);
+        frontClimberRetractB.whileHeld(new FrontClimberRetract());
+        backClimberRetractB = new JoystickButton(opRightJoy, 10);
+        backClimberRetractB.whileHeld(new BackClimberRetract());
         opLeftJoy = new Joystick(3);
         
-        homeDownB = new JoystickButton(opLeftJoy, 7);
+        homeDownB = new JoystickButton(opLeftJoy, 8);
         homeDownB.whenPressed(new HomeElevDown());
-        backClimberRetractB = new JoystickButton(opLeftJoy, 4);
-        backClimberRetractB.whileHeld(new BackClimberRetract());
         backClimberDeployB = new JoystickButton(opLeftJoy, 6);
         backClimberDeployB.whileHeld(new BackClimberDeploy());
-        frontClimberRetractB = new JoystickButton(opLeftJoy, 3);
-        frontClimberRetractB.whileHeld(new FrontClimberRetract());
         frontClimberDeployB = new JoystickButton(opLeftJoy, 5);
         frontClimberDeployB.whileHeld(new FrontClimberDeploy());
         moveElevLowCargo = new JoystickButton(opLeftJoy, 12);
@@ -163,8 +163,8 @@ public class OI {
         moveElevLowHatch.whenPressed(new MoveElevator("LowHatch"));
         moveElevGround = new JoystickButton(opLeftJoy, 2);
         moveElevGround.whenPressed(new MoveElevator("Ground"));
-        moveElevStow = new JoystickButton(opLeftJoy, 1);
-        moveElevStow.whenPressed(new MoveElevator("Stow"));
+        moveElevStow = new JoystickButton(opLeftJoy, 7);
+        moveElevStow.whenPressed(new MoveElevator(""));
         rightJoy = new Joystick(0);
         
         leftJoy = new Joystick(1);

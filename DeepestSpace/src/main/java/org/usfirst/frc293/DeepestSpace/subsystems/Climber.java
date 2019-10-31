@@ -118,6 +118,9 @@ public class Climber extends Subsystem {
         frontClimber.setNeutralMode(NeutralMode.Brake);
         frontClimber.setInverted(InvertType.InvertMotorOutput);
         frontClimber.setSensorPhase(true);
+        frontClimber.enableCurrentLimit(true);
+        frontClimber.configPeakCurrentLimit(52);
+
         // These were stored in memory and may be our limiting issue?
         //frontClimber.configForwardSoftLimitEnable(true);
         //frontClimber.configForwardSoftLimitThreshold(inchesToRaw(heightLimit));
@@ -129,6 +132,8 @@ public class Climber extends Subsystem {
         backClimber.config_kD(0, bkD);
         backClimber.setSelectedSensorPosition(0);
         backClimber.setNeutralMode(NeutralMode.Brake);
+        backClimber.enableCurrentLimit(true);
+        backClimber.configPeakCurrentLimit(52);
 
         // THis may be our issue with limiting positions!  Maybe ...
         //backClimber.configForwardSoftLimitEnable(true);
