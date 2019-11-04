@@ -179,6 +179,10 @@ public class Climber extends Subsystem {
         SmartDashboard.putNumber("Front Setpoint", frontClimber.getClosedLoopTarget());
         SmartDashboard.putNumber("FrontSetpoint Code",frontSetpoint);
         SmartDashboard.putNumber("Front Follower Setpoint internal", frontCimberFollow.getClosedLoopTarget());
+
+        SmartDashboard.putNumber("Back Encoder", backClimber.getSensorCollection().getQuadraturePosition());
+        SmartDashboard.putNumber("Back Setpoint", backClimber.getClosedLoopTarget());
+        SmartDashboard.putNumber("Back Setpoint Code",backSetpoint);
         
 
 

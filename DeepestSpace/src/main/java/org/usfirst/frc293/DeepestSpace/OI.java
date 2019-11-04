@@ -117,10 +117,10 @@ public class OI {
         lowCargoB.whenPressed(new MoveElevator("LowCargo"));
         opRightJoy = new Joystick(2);
         
-        retractBackClimberB = new JoystickButton(opRightJoy, 7);
-        retractBackClimberB.whenPressed(new RetractBackClimber());
-        retractFrontClimberB = new JoystickButton(opRightJoy, 7);
-        retractFrontClimberB.whenPressed(new RetractFrontClimber());
+        // retractBackClimberB = new JoystickButton(opRightJoy, 7);
+        // retractBackClimberB.whenPressed(new RetractBackClimber());
+        // retractFrontClimberB = new JoystickButton(opRightJoy, 7);
+        // retractFrontClimberB.whenPressed(new RetractFrontClimber());
         raiseHab3B = new JoystickButton(opRightJoy, 8);
         raiseHab3B.whenPressed(new RaiseHab3());
         raiseHab2B = new JoystickButton(opRightJoy, 7);
@@ -142,9 +142,9 @@ public class OI {
         shootB = new JoystickButton(opRightJoy, 1);
         shootB.whenPressed(new Shoot());
         frontClimberRetractB = new JoystickButton(opRightJoy, 9);
-        frontClimberRetractB.whileHeld(new FrontClimberRetract());
+        frontClimberRetractB.whenPressed(new RetractFrontClimber());
         backClimberRetractB = new JoystickButton(opRightJoy, 10);
-        backClimberRetractB.whileHeld(new BackClimberRetract());
+        backClimberRetractB.whenPressed(new RetractBackClimber());
         opLeftJoy = new Joystick(3);
         
         homeDownB = new JoystickButton(opLeftJoy, 8);
@@ -164,16 +164,14 @@ public class OI {
         moveElevGround = new JoystickButton(opLeftJoy, 2);
         moveElevGround.whenPressed(new MoveElevator("Ground"));
         moveElevStow = new JoystickButton(opLeftJoy, 7);
-        moveElevStow.whenPressed(new MoveElevator(""));
+        moveElevStow.whenPressed(new MoveElevator("Stow"));
         rightJoy = new Joystick(0);
         
         leftJoy = new Joystick(1);
         
-        climberBackwardB = new JoystickButton(leftJoy, 3);
+        climberBackwardB = new JoystickButton(opLeftJoy, 3);
         climberBackwardB.whileHeld(new ClimberBackward());
-        climberForwardB = new JoystickButton(leftJoy, 5);
-        climberForwardB.whileHeld(new ClimberForward());
-
+    
 
         // SmartDashboard Buttons
         SmartDashboard.putData("DriveWJoystick", new DriveWJoystick());
